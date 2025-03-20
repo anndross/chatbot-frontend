@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useChat } from "@/chat/contex";
+import { useChat } from "@/chat/context";
 import CloseSVG from "@/assets/close.svg";
 
 export function Close() {
@@ -11,7 +11,7 @@ export function Close() {
       variant="secondary"
       onlyIcon
     >
-      <img src={CloseSVG} alt="" width={16} height={16} />
+      <CloseSVG />
     </Button>
   );
 }

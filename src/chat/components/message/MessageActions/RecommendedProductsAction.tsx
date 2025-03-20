@@ -7,7 +7,7 @@ import { useEffect, useState, useTransition } from "react";
 import { MessageWrapper } from "../MessageWrapper";
 import { AddToCartAction } from "./AddToCartAction";
 import { formatPrice } from "@/utils/format-price";
-import { useChat } from "@/chat/contex";
+import { useChat } from "@/chat/context";
 
 export function RecommendedProductsAction({
   data: recommendedProducts,
@@ -75,8 +75,14 @@ export function RecommendedProductsAction({
                 <span>{product.name}</span>
 
                 <div className="flex gap-2 font-normal">
-                  <del>{formatPrice(product.price)}</del>
-                  <strong>{formatPrice(product.listPrice)}</strong>
+                  {product.listPrice === product.price ? (
+                    <strong>{formatPrice(product.price)}</strong>
+                  ) : (
+                    <>
+                      <del>{formatPrice(product.listPrice)}</del>
+                      <strong>{formatPrice(product.price)}</strong>
+                    </>
+                  )}
                 </div>
               </a>
             </div>

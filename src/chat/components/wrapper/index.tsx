@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
-import { useChat } from "../../contex";
+import { useChat } from "../../context";
 
 interface WrapperProps {
   children: ReactNode | ReactNode[];

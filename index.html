@@ -18,8 +18,36 @@
 
     <title>Vite + React + TS</title>
   </head>
+
   <body>
-    <div id="root"></div>
+    <!-- 
+    
+
+    <script src="widget.umd.js"></script>
+    <div id="widget-container"></div>
+    <script>
+      Widget.mountWidget(document.getElementById("widget-container"), {
+        customInput: document.getElementById("widget-container"),
+        customButton: document.getElementById("widget-container"),
+      });
+    </script>
+    
+    -->
+
+    <button id="widget-custom-trigger" style="background-color: black">
+      Enviar ao chat
+    </button>
+    <input
+      id="widget-custom-input"
+      placeholder="Pergunte ao chat"
+      style="background-color: black"
+    />
+
+    <div
+      id="widget-container"
+      style="position: fixed; right: 20px; bottom: 20px"
+    ></div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

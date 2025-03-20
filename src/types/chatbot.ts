@@ -21,11 +21,11 @@ export type Actions =
     }
   | {
       type: "add_to_cart";
-      data: [];
+      data: undefined | [];
     }
   | {
       type: "see_more";
-      data: [];
+      data: undefined | [];
     };
 
 export type ActionsType = "add_to_cart" | "see_more" | "recommend_product";

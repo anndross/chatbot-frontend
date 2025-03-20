@@ -4,10 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot</title>
+    <link rel="stylesheet" href="widget.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script src="./bundle.js"></script>
-    <!-- Aqui carregamos o React -->
+    <script>
+      window.process = globalThis.process = {
+        env: {
+          NODE_ENV: "production",
+        },
+      };
+    </script>
+
+    <!-- Carregar React e ReactDOM antes do script do widget -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Carregar o script do widget após o React e ReactDOM -->
+    <script src="widget.umd.js"></script>
+
+    <div id="widget-container"></div>
+
+    <script>
+      console.log("Widget", Widget); // Deve mostrar o objeto Widget
+
+      // Verifique se a função mountWidget está acessível
+      Widget.mountWidget(document.getElementById("widget-container"));
+    </script>
   </body>
 </html>
