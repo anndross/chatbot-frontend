@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { Button } from "../../../components/ui/button";
-import { useChat } from "../contex";
-import ChatSVG from "../../../assets/chat.svg";
+import { Button } from "@/components/ui/button";
+import { useChat } from "@/chat/contex";
+import ChatSVG from "@/assets/chat.svg";
 
-export function Trigger() {
+export function Open() {
   const { chatbot, updateChat } = useChat();
 
   return (

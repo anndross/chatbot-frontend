@@ -1,10 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
-  font-family: "Outfit", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -36,4 +33,52 @@ body {
   button {
     background-color: #f9f9f9;
   }
+}
+
+#chatbot {
+  font-family: "Outfit", sans-serif;
+
+  .loader {
+    display: block;
+    width: 32px;
+    aspect-ratio: 4;
+    background: no-repeat radial-gradient(circle closest-side, #fff 90%, #0000)
+        0% 50%,
+      no-repeat radial-gradient(circle closest-side, #fff 90%, #0000) 50% 50%,
+      no-repeat radial-gradient(circle closest-side, #fff 90%, #0000) 100% 50%;
+    background-size: calc(100% / 3) 100%;
+    animation: loading 0.8s infinite linear;
+  }
+}
+
+@keyframes loading {
+  33% {
+    background-size: calc(100% / 3) 0, calc(100% / 3) 100%, calc(100% / 3) 100%;
+  }
+  50% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 0, calc(100% / 3) 100%;
+  }
+  66% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0;
+  }
+}
+
+#chatbot div::-webkit-scrollbar {
+  width: 4px;
+}
+
+#chatbot div::-webkit-scrollbar-track {
+  border-radius: 50%;
+}
+
+#chatbot div::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+  width: 4px;
+}
+
+@theme {
+  --color-primary: oklch(0.98 0 0);
+  --color-secondary: oklch(0.32 0 0);
+  --color-tertiary: oklch(0.61 0 0);
 }

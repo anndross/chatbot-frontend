@@ -5,11 +5,9 @@ type AuthTokenResponse = {
   auth_token: string;
 };
 
-export async function getAuthToken(): Promise<
-  AuthTokenResponse["auth_token"] | null
-> {
-  const clientId = "casa_mais_facil_cb";
-
+export async function getAuthToken(
+  clientId: string
+): Promise<AuthTokenResponse["auth_token"] | null> {
   try {
     const { data } = await axios.post<AuthTokenResponse>(
       `${API_BASE_URL}/get-access-token`,

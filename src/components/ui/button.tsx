@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode | ReactNode[];
@@ -7,24 +7,35 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
 }
 
+type StylesOptions = "default" | "primary" | "secondary" | "icon";
+
 export function Button({
   children,
   onlyIcon,
   variant = "primary",
   ...props
 }: ButtonProps) {
+  const styles: Record<StylesOptions, ComponentProps<"div">["className"]> = {
+    default:
+      "cursor-pointer duration-200 flex gap-4 items-center justify-center py-2.5 px-5 text-sm font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.25)] rounded-4xl border-none",
+    primary:
+      "text-secondary hover:bg-secondary stroke-secondary hover:stroke-white! hover:text-primary bg-primary",
+    secondary:
+      "text-primary hover:bg-primary hover:stroke-secondary stroke-white hover:text-secondary bg-secondary",
+    icon: "rounded-full py-2! px-2! duration-150 hover:scale-110 hover:opacity-90",
+  };
+
   return (
     <button
       {...props}
       className={clsx({
-        "cursor-pointer duration-200 flex gap-4 items-center justify-center py-2.5 px-5 text-sm font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.25)] rounded-4xl border-none":
-          true,
+        [`${styles.default}`]: styles["default"],
+        [`${styles.primary}`]: variant === "primary",
+        [`${styles.secondary}`]: variant === "secondary",
+        [`${styles.icon} hover:bg-primary!`]: variant === "primary" && onlyIcon,
+        [`${styles.icon} hover:bg-secondary!`]:
+          variant === "secondary" && onlyIcon,
         [`${props.className}`]: props.className,
-        "text-neutral-800 hover:bg-neutral-800 stroke-[#333333] hover:stroke-white hover:text-neutral-50 bg-neutral-50":
-          variant === "primary",
-        "text-neutral-50 hover:bg-neutral-50 hover:stroke-[#333333] stroke-white hover:text-neutral-800 bg-neutral-800":
-          variant === "secondary",
-        "rounded-full py-2! px-2!": onlyIcon,
       })}
     >
       {children}

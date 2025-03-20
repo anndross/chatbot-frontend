@@ -1,8 +1,8 @@
-import { Button } from "../../../components/ui/button";
-import { useChat } from "../contex";
-import CloseSVG from "../../../assets/close.svg";
+import { Button } from "@/components/ui/button";
+import { useChat } from "@/chat/contex";
+import CloseSVG from "@/assets/close.svg";
 
-export function CloseButton() {
+export function Close() {
   const { updateChat } = useChat();
 
   return (

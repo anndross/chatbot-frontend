@@ -1,11 +1,12 @@
 import axios from "axios";
 import { API_BASE_URL } from "./config.js";
+import { ChatbotResponse } from "../types/chatbot.js";
 
 export async function askChatbot(
   question: string,
   location: string,
   conversationId: string
-): Promise<string | null> {
+): Promise<ChatbotResponse["response"] | null> {
   if (!question) return null;
 
   const { pathname, hostname } = new URL(location);
@@ -19,7 +20,7 @@ export async function askChatbot(
   const platformName = "vtex";
 
   try {
-    const { data } = await axios.post(`${API_BASE_URL}/chat`, {
+    const { data } = await axios.post<ChatbotResponse>(`${API_BASE_URL}/chat`, {
       question,
       slug,
       storeName,
@@ -27,11 +28,10 @@ export async function askChatbot(
       conversationId,
     });
 
-    const { final_response } = data.response;
-
-    return final_response;
+    return data.response;
   } catch (error) {
     console.error("❌ Erro ao chamar o chatbot:", error);
+
     return null;
   }
 }

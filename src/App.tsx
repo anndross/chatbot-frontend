@@ -1,5 +1,5 @@
-import { Chat } from "./modules/chat";
-import { ChatProvider } from "./modules/chat/contex";
+import { Chat } from "./chat";
+import { ChatProvider } from "./chat/contex";
 import "./App.css";
 
 const App = () => {

@@ -1,15 +1,16 @@
 import { useEffect, useTransition } from "react";
 import { useChat } from "./contex";
-import { Trigger } from "./components/trigger";
-import { ChatContent } from "./components/chat-content";
-import { Separator } from "../../components/ui/separator";
-import { CloseButton } from "./components/close-button";
-import { TextArea } from "./components/text-area";
+import { Open } from "./components/triggers/open";
+import { Content } from "./components/content";
+import { Separator } from "../components/ui/separator";
+import { Close } from "./components/triggers/close";
 import { Wrapper } from "./components/wrapper";
-import { getAuthToken } from "../../services/getAuthToken";
+import { getAuthToken } from "../services/getAuthToken";
 import Cookies from "js-cookie";
-import { verifyToken } from "../../services/verifyToken";
-import { askChatbot } from "../../services/askChatBot";
+import { verifyToken } from "../services/verifyToken";
+import { askChatbot } from "../services/askChatBot";
+import { ActionsType } from "../types/chatbot";
+import { Input } from "./components/input";
 
 export function Chat() {
   const {
@@ -40,7 +41,7 @@ export function Chat() {
       if (storedAuthToken && verifyToken(storedAuthToken)) {
         updateToken(storedAuthToken);
       } else {
-        const token = await getAuthToken();
+        const token = await getAuthToken("casa_mais_facil_cb");
 
         updateToken(token);
       }
@@ -58,7 +59,32 @@ export function Chat() {
           conversationId
         );
 
-        if (!response) return;
+        if (!response) {
+          setChatbot((prev) => ({
+            ...prev,
+            messages: [
+              ...messages,
+              {
+                type: "bot",
+                value: "Erro ao conectar com o chatbot.",
+                time: new Date(),
+              },
+            ],
+          }));
+          return;
+        }
+
+        const mappedActionsResponse = response.actions.map(
+          (act: ActionsType) => {
+            return {
+              type: act,
+              data:
+                act === "recommend_product"
+                  ? response["recommended_products"]
+                  : [],
+            };
+          }
+        );
 
         setChatbot((prev) => ({
           ...prev,
@@ -66,8 +92,9 @@ export function Chat() {
             ...messages,
             {
               type: "bot",
-              value: response,
+              value: response.final_response,
               time: new Date(),
+              actions: mappedActionsResponse,
             },
           ],
         }));
@@ -83,24 +110,22 @@ export function Chat() {
   return (
     <>
       <Wrapper>
-        <div className="w-full h-full relative p-6 flex flex-col">
-          <div className="flex justify-between items-end pt-3 pb-5">
-            <h2 className="text-neutral-800 font-bold text-2xl">AlfredBot</h2>
+        <div className="flex justify-between items-end pt-3 pb-[22px]">
+          <h2 className="text-secondary font-bold text-2xl">AlfredBot</h2>
 
-            <CloseButton />
-          </div>
+          <Close />
+        </div>
 
-          <Separator />
+        <Separator />
 
-          <ChatContent />
+        <Content />
 
-          <div className="rounded-b-4xl bg-neutral-50 py-2 w-full h-auto flex items-center justify-center">
-            <TextArea />
-          </div>
+        <div className="rounded-b-4xl bg-primary w-full h-auto flex items-center justify-center">
+          <Input />
         </div>
       </Wrapper>
 
-      <Trigger />
+      <Open />
     </>
   );
 }
