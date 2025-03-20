@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/chat/context";
 import ChatSVG from "@/assets/chat.svg";
-import { MountWidgetProps } from "@/main";
 import { useEffect } from "react";
+import { MountWidgetProps } from "@/main";
 
 interface OpenProps {
   as?: MountWidgetProps;
@@ -42,8 +42,8 @@ export function Open({ as }: OpenProps) {
     }
 
     if (as?.customButton) {
-      const button = document.getElementById(as.customButton.id);
-      const input = document.getElementById(as.customInput.id);
+      const button = document.getElementById(as?.customButton?.id || "");
+      const input = document.getElementById(as?.customInput?.id || "");
 
       if (!button) return;
 
@@ -65,8 +65,8 @@ export function Open({ as }: OpenProps) {
     // Cleanup para evitar múltiplos binds
     return () => {
       if (as?.customButton) {
-        const button = document.getElementById(as.customButton.id);
-        const input = document.getElementById(as.customInput.id);
+        const button = document.getElementById(as?.customButton?.id || "");
+        const input = document.getElementById(as?.customInput?.id || "");
 
         button?.removeEventListener("click", triggerChatWithMessage);
         button?.removeEventListener("click", triggerChat);

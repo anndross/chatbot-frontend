@@ -4,8 +4,8 @@ import "./index.css";
 import Widget from "./Widget";
 
 export interface MountWidgetProps {
-  customInput: HTMLElement;
-  customButton: HTMLElement;
+  customInput: HTMLInputElement;
+  customButton: HTMLButtonElement;
 }
 
 function mountWidget(el: HTMLElement, props?: MountWidgetProps) {

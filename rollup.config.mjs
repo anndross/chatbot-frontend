@@ -8,9 +8,9 @@ import { config } from "dotenv";
 import { parseArgs } from "node:util";
 import injectProcessEnv from "rollup-plugin-inject-process-env";
 import nodePolyfills from "rollup-plugin-polyfill-node";
-import postcss from "rollup-plugin-postcss";
 import tsConfigPaths from "rollup-plugin-tsconfig-paths";
 import { visualizer } from "rollup-plugin-visualizer";
+import svgr from "@svgr/rollup";
 
 const args = parseArgs({
   options: {
@@ -43,7 +43,7 @@ const ENV_VARIABLES = config({
 const fileName = ENV_VARIABLES.WIDGET_NAME || "widget.js";
 
 export default {
-  input: "./src/main.tsx",
+  input: "./src/embed.tsx",
   output: {
     file: `dist/${fileName}`,
     format: "iife",
@@ -56,6 +56,7 @@ export default {
     },
   },
   plugins: [
+    svgr(),
     tsConfigPaths({
       tsConfigPath: "./tsconfig.json",
     }),

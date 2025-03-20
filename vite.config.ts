@@ -12,23 +12,23 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-  build: {
-    lib: {
-      entry: "src/main.tsx",
-      name: "Widget",
-      fileName: (format) => `widget.${format}.js`, // Garante .js em vez de .cjs
-      formats: ["umd", "es"], // Mantemos UMD e ES
-    },
-    rollupOptions: {
-      external: ["react", "react-dom"], // Garante que React não seja incluído no bundle
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
-      },
-    },
-  },
+  // build: {
+  //   lib: {
+  //     entry: "src/main.tsx",
+  //     name: "Widget",
+  //     fileName: (format) => `widget.${format}.js`, // Garante .js em vez de .cjs
+  //     formats: ["umd", "es"], // Mantemos UMD e ES
+  //   },
+  //   rollupOptions: {
+  //     external: ["react", "react-dom"], // Garante que React não seja incluído no bundle
+  //     output: {
+  //       globals: {
+  //         react: "React",
+  //         "react-dom": "ReactDOM",
+  //       },
+  //     },
+  //   },
+  // },
   server: {
     open: true,
     port: 5173,
