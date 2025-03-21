@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,31 +15,10 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap"
       rel="stylesheet"
     />
-
-    <title>Vite + React + TS</title>
-    <script type="module" crossorigin src="/assets/index-AxQAKz1Q.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D-u4uqhp.css">
   </head>
-
   <body>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        Widget.mountWidget();
-      });
-    </script>
+    <script src="alfred-bot.umd.js"></script>
 
-    <button id="widget-custom-trigger" style="background-color: black">
-      Enviar ao chat
-    </button>
-    <input
-      id="widget-custom-input"
-      placeholder="Pergunte ao chat"
-      style="background-color: black"
-    />
-
-    <div
-      id="widget-container"
-      style="position: fixed; right: 20px; bottom: 20px"
-    ></div>
+    <alfred-bot></alfred-bot>
   </body>
 </html>

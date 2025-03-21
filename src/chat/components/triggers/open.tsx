@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/chat/context";
 import ChatSVG from "@/assets/chat.svg";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { MountWidgetProps } from "@/main";
 
 interface OpenProps {
@@ -10,72 +10,73 @@ interface OpenProps {
 }
 
 export function Open({ as }: OpenProps) {
-  const {
-    setChatbot,
-    chatbot: { loadingMessage },
-  } = useChat();
+  console.log(as);
+  // const {
+  //   setChatbot,
+  //   chatbot: { loadingMessage },
+  // } = useChat();
 
-  useEffect(() => {
-    function triggerChatWithMessage() {
-      if (!as?.customInput) return;
+  // useEffect(() => {
+  //   function triggerChatWithMessage() {
+  //     if (!as?.customInput) return;
 
-      const input = as.customInput as HTMLInputElement;
-      const value = input.value;
+  //     const input = as.customInput as HTMLInputElement;
+  //     const value = input.value;
 
-      if (!value.length) return;
+  //     if (!value.length) return;
 
-      setChatbot((prev) => ({
-        ...prev,
-        visible: true,
-        messages: [...prev.messages, { type: "user", value, time: new Date() }],
-      }));
+  //     setChatbot((prev) => ({
+  //       ...prev,
+  //       visible: true,
+  //       messages: [...prev.messages, { type: "user", value, time: new Date() }],
+  //     }));
 
-      input.value = "";
-    }
+  //     input.value = "";
+  //   }
 
-    function triggerChatWithMessageByEnter(event: KeyboardEvent) {
-      if (event.key === "Enter") triggerChatWithMessage();
-    }
+  //   function triggerChatWithMessageByEnter(event: KeyboardEvent) {
+  //     if (event.key === "Enter") triggerChatWithMessage();
+  //   }
 
-    function triggerChat() {
-      setChatbot((prev) => ({ ...prev, visible: true }));
-    }
+  //   function triggerChat() {
+  //     setChatbot((prev) => ({ ...prev, visible: true }));
+  //   }
 
-    if (as?.customButton) {
-      const button = document.getElementById(as?.customButton?.id || "");
-      const input = document.getElementById(as?.customInput?.id || "");
+  //   if (as?.customButton) {
+  //     const button = document.getElementById(as?.customButton?.id || "");
+  //     const input = document.getElementById(as?.customInput?.id || "");
 
-      if (!button) return;
+  //     if (!button) return;
 
-      // Remove os eventos antigos antes de adicionar novos
-      button.removeEventListener("click", triggerChatWithMessage);
-      button.removeEventListener("click", triggerChat);
+  //     // Remove os eventos antigos antes de adicionar novos
+  //     button.removeEventListener("click", triggerChatWithMessage);
+  //     button.removeEventListener("click", triggerChat);
 
-      if (input)
-        input.removeEventListener("keyup", triggerChatWithMessageByEnter);
+  //     if (input)
+  //       input.removeEventListener("keyup", triggerChatWithMessageByEnter);
 
-      if (input && !loadingMessage) {
-        button.addEventListener("click", triggerChatWithMessage);
-        input.addEventListener("keyup", triggerChatWithMessageByEnter);
-      } else {
-        button.addEventListener("click", triggerChat);
-      }
-    }
+  //     if (input && !loadingMessage) {
+  //       button.addEventListener("click", triggerChatWithMessage);
+  //       input.addEventListener("keyup", triggerChatWithMessageByEnter);
+  //     } else {
+  //       button.addEventListener("click", triggerChat);
+  //     }
+  //   }
 
-    // Cleanup para evitar múltiplos binds
-    return () => {
-      if (as?.customButton) {
-        const button = document.getElementById(as?.customButton?.id || "");
-        const input = document.getElementById(as?.customInput?.id || "");
+  //   // Cleanup para evitar múltiplos binds
+  //   return () => {
+  //     if (as?.customButton) {
+  //       const button = document.getElementById(as?.customButton?.id || "");
+  //       const input = document.getElementById(as?.customInput?.id || "");
 
-        button?.removeEventListener("click", triggerChatWithMessage);
-        button?.removeEventListener("click", triggerChat);
-        input?.removeEventListener("keyup", triggerChatWithMessageByEnter);
-      }
-    };
-  }, [as, loadingMessage]);
+  //       button?.removeEventListener("click", triggerChatWithMessage);
+  //       button?.removeEventListener("click", triggerChat);
+  //       input?.removeEventListener("keyup", triggerChatWithMessageByEnter);
+  //     }
+  //   };
+  // }, [as, loadingMessage]);
 
-  if (as?.customButton && as?.customInput) return null;
+  // if (as?.customButton && as?.customInput) return null;
 
   return <NativeOpen />;
 }
