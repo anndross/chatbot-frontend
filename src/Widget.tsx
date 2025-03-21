@@ -8,9 +8,9 @@ export interface WidgetProps {
 
 const Widget = ({ props }: WidgetProps) => {
   return (
-    <ChatProvider>
+    <ChatProvider props={props}>
       <main id="chatbot">
-        <Chat props={props} />
+        <Chat />
       </main>
     </ChatProvider>
   );

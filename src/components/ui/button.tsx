@@ -17,13 +17,13 @@ export function Button({
 }: ButtonProps) {
   const styles: Record<StylesOptions, ComponentProps<"div">["className"]> = {
     default:
-      "cursor-pointer duration-200 flex gap-4 items-center justify-center py-2.5 px-5 text-sm font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.25)] rounded-4xl border-none",
+      "cursor-pointer duration-200 flex gap-4 items-center justify-center py-2.5 px-5 text-sm font-semibold button-shadow rounded-4xl border-none",
     primary: "text-secondary hover:bg-secondary hover:text-primary bg-primary",
     secondary:
       "text-primary hover:bg-primary hover:text-secondary bg-secondary",
     icon: "rounded-full py-2! px-2! duration-150 hover:scale-110 hover:opacity-90",
   };
-
+  console.log("props.className", props.className);
   return (
     <button
       {...props}

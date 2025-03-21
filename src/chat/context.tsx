@@ -8,8 +8,10 @@ import {
 } from "react";
 import { Chatbot } from "../types/chatbot";
 import { Auth } from "../types/auth";
+import { MountWidgetProps } from "@/main";
 
 export type ChatContextType = {
+  props?: MountWidgetProps;
   chatbot: Chatbot;
   auth: Auth;
   setChatbot: Dispatch<SetStateAction<ChatContextType["chatbot"]>>;
@@ -19,6 +21,7 @@ export type ChatContextType = {
 };
 
 const ChatContext = createContext<ChatContextType>({
+  props: undefined,
   chatbot: {
     visible: false,
     loadingMessage: false,
@@ -43,9 +46,10 @@ const ChatContext = createContext<ChatContextType>({
 
 interface ChatProviderProps {
   children: ReactNode | ReactNode[];
+  props?: MountWidgetProps;
 }
 
-export function ChatProvider({ children }: ChatProviderProps) {
+export function ChatProvider({ children, props }: ChatProviderProps) {
   const [chatbot, setChatbot] = useState<Chatbot>({
     visible: false,
     loadingMessage: false,
@@ -80,7 +84,15 @@ export function ChatProvider({ children }: ChatProviderProps) {
 
   return (
     <ChatContext.Provider
-      value={{ chatbot, setChatbot, updateChat, auth, setAuth, updateAuth }}
+      value={{
+        props,
+        chatbot,
+        setChatbot,
+        updateChat,
+        auth,
+        setAuth,
+        updateAuth,
+      }}
     >
       {children}
     </ChatContext.Provider>

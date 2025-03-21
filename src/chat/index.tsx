@@ -11,9 +11,8 @@ import { verifyToken } from "../services/verifyToken";
 import { askChatbot } from "../services/askChatBot";
 import { Actions, ActionsType } from "../types/chatbot";
 import { Input } from "./components/input";
-import { WidgetProps } from "@/Widget";
 
-export function Chat({ props }: WidgetProps) {
+export function Chat() {
   const {
     chatbot: { messages, conversationId },
     updateAuth,
@@ -91,7 +90,7 @@ export function Chat({ props }: WidgetProps) {
           <Input />
         </div>
       </Wrapper>
-      <Open as={props} />
+      <Open />
     </>
   );
 }

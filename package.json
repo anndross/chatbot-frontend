@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "rm -rf dist && npx tailwindcss -i ./src/index.css -o ./src/tailwind.css --minify && tsc -b && vite build",
+    "dev": "concurrently \"npm run css:watch\" \"vite\"",
+    "css:watch": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.css --watch",
+    "css:minify": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.css --minify",
+    "build": "rm -rf dist && npm run css:minify && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

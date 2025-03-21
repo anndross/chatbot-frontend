@@ -21,7 +21,9 @@ export function AddToCartAction({ product, className }: AddToCartActionProps) {
         addProduct(product, "casamaisfacil", "vtex");
       }}
     >
-      <MinicarSVG />
+      <div className="w-4 h-4">
+        <MinicarSVG />
+      </div>
     </Button>
   );
 }

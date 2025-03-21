@@ -3,17 +3,34 @@ import tailwindCSS from "./tailwind.css?inline"; // Importa o CSS gerado
 
 import ReactDOM from "react-dom/client";
 
+export type ChatPositions = "left-bottom" | "left" | "right-bottom" | "right";
+
+export type TriggerPositions = "left-bottom" | "right-bottom";
+
+export interface MountWidgetProps {
+  customInputId: string;
+  customButtonId: string;
+  chatPosition?: ChatPositions;
+  triggerPosition?: TriggerPositions;
+}
+
 class AlfredBot extends HTMLElement {
   static get observedAttributes() {
-    return ["custom-input-id", "custom-button-id"];
+    return [
+      "custom-input-id",
+      "custom-button-id",
+      "chat-position",
+      "trigger-position",
+    ];
   }
 
   private root: ReactDOM.Root | null = null;
   private mountPoint: HTMLDivElement | null = null;
+  private styleElement: HTMLStyleElement | null = null;
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" }); // Garante que o Shadow DOM seja criado no início
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -27,34 +44,66 @@ class AlfredBot extends HTMLElement {
   render() {
     const customInputId = this.getAttribute("custom-input-id") || "";
     const customButtonId = this.getAttribute("custom-button-id") || "";
+    const chatPosition = this.getAttribute("chat-position") || "";
+    const triggerPosition = this.getAttribute("trigger-position") || "";
+
+    const chatPositions: ChatPositions[] = [
+      "left",
+      "left-bottom",
+      "right",
+      "right-bottom",
+    ];
+    const triggerPositions: TriggerPositions[] = [
+      "left-bottom",
+      "right-bottom",
+    ];
 
     if (!this.shadowRoot) return;
 
-    // Apenas cria o mountPoint uma vez
     if (!this.mountPoint) {
-      this.shadowRoot.innerHTML = ""; // Limpa o Shadow DOM
+      this.shadowRoot.innerHTML = "";
 
       this.mountPoint = document.createElement("div");
 
-      // Adiciona o CSS encapsulado no Shadow DOM
-      const style = document.createElement("style");
-      style.textContent = tailwindCSS;
-      this.shadowRoot.appendChild(style);
+      // Adiciona as fontes no Shadow DOM
+      const fontLink1 = document.createElement("link");
+      fontLink1.rel = "stylesheet";
+      fontLink1.href =
+        "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap";
+
+      const fontLink2 = document.createElement("link");
+      fontLink2.rel = "stylesheet";
+      fontLink2.href =
+        "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap";
+
+      this.shadowRoot.appendChild(fontLink1);
+      this.shadowRoot.appendChild(fontLink2);
+
+      // Criar um <style> e sempre atualizar com o CSS gerado pelo Tailwind
+      if (!this.styleElement) {
+        this.styleElement = document.createElement("style");
+        this.shadowRoot.appendChild(this.styleElement);
+      }
+      this.styleElement.textContent = tailwindCSS;
 
       this.shadowRoot.appendChild(this.mountPoint);
     }
 
-    // Apenas cria o React Root uma vez
     if (!this.root) {
       this.root = ReactDOM.createRoot(this.mountPoint);
     }
 
-    // Renderiza o componente React no Shadow DOM
     this.root.render(
       <Widget
         props={{
           customInputId,
           customButtonId,
+          ...(chatPositions.includes(chatPosition as ChatPositions)
+            ? { chatPosition: chatPosition as TriggerPositions }
+            : {}),
+          ...(triggerPositions.includes(triggerPosition as TriggerPositions)
+            ? { triggerPosition: triggerPosition as TriggerPositions }
+            : {}),
         }}
       />
     );
@@ -62,55 +111,3 @@ class AlfredBot extends HTMLElement {
 }
 
 customElements.define("alfred-bot", AlfredBot);
-
-export interface MountWidgetProps {
-  customInputId: string;
-  customButtonId: string;
-}
-
-// function mountWidget(el: HTMLElement, props?: MountWidgetProps) {
-//   let root: Root | null = null;
-//   if (el) {
-//     root = createRoot(el);
-//   } else {
-//     const body = document.querySelector("body");
-
-//     if (body) root = createRoot(body);
-//   }
-//   if (!root) return;
-
-//   root.render(
-//     <StrictMode>
-//       {!el ? (
-//         <div className="fixed right-5 bottom-5">
-//           <Widget props={props} />
-//         </div>
-//       ) : (
-//         <Widget props={props} />
-//       )}
-//     </StrictMode>
-//   );
-// }
-
-// // Se estiver em desenvolvimento, renderiza automaticamente
-// if (import.meta.env.MODE === "development") {
-//   const customButton = document.getElementById("widget-custom-trigger")!;
-//   const customInput = document.getElementById("widget-custom-input")!;
-
-//   console.log({
-//     customButton,
-//     customInput,
-//   });
-
-//   const devRoot = document.getElementById("widget-container");
-
-//   if (devRoot) {
-//     mountWidget(devRoot);
-//   }
-// }
-
-// // export default { mountWidget };
-
-// // Exporta diretamente para evitar problemas no UMD
-// (globalThis as any).Widget = { mountWidget };
-// console.log("globalThis", globalThis);

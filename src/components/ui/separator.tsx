@@ -9,7 +9,7 @@ export function Separator({ className }: SeparatorProps) {
   return (
     <hr
       className={clsx({
-        "bg-secondary": true,
+        "border-neutral-400": true,
         [`${className}`]: className,
       })}
     />
