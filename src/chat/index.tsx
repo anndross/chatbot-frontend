@@ -33,7 +33,7 @@ export function Chat({ props }: WidgetProps) {
     if (storedAuthToken && verifyToken(storedAuthToken)) {
       updateToken(storedAuthToken);
     } else {
-      const token = await getAuthToken("casa_mais_facil_cb");
+      const token = await getAuthToken();
       updateToken(token);
     }
   }, []);
@@ -45,11 +45,7 @@ export function Chat({ props }: WidgetProps) {
   const askToChat = useCallback(
     async (message: string, conversationId: string) => {
       startTransition(async () => {
-        const response = await askChatbot(
-          message,
-          window.location.href,
-          conversationId
-        );
+        const response = await askChatbot(message, conversationId);
 
         setChatbot((prev) => ({
           ...prev,

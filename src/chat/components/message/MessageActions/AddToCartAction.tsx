@@ -21,12 +21,7 @@ export function AddToCartAction({ product, className }: AddToCartActionProps) {
         addProduct(product, "casamaisfacil", "vtex");
       }}
     >
-      <img
-        src={MinicarSVG}
-        alt="Adicione o produto ao carrinho"
-        width={18}
-        height={18}
-      />
+      <MinicarSVG />
     </Button>
   );
 }

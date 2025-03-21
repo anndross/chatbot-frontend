@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 import "./index.css";
 import Widget from "./Widget";
 
@@ -9,11 +9,25 @@ export interface MountWidgetProps {
 }
 
 function mountWidget(el: HTMLElement, props?: MountWidgetProps) {
-  if (!el) return;
-  const root = createRoot(el);
+  let root: Root | null = null;
+  if (el) {
+    root = createRoot(el);
+  } else {
+    const body = document.querySelector("body");
+
+    if (body) root = createRoot(body);
+  }
+  if (!root) return;
+
   root.render(
     <StrictMode>
-      <Widget props={props} />
+      {!el ? (
+        <div className="fixed right-5 bottom-5">
+          <Widget props={props} />
+        </div>
+      ) : (
+        <Widget props={props} />
+      )}
     </StrictMode>
   );
 }
@@ -29,6 +43,7 @@ if (import.meta.env.MODE === "development") {
   });
 
   const devRoot = document.getElementById("widget-container");
+
   if (devRoot) {
     mountWidget(devRoot);
   }

@@ -78,6 +78,8 @@ export function Input() {
 
           if (key === "Enter") {
             event.preventDefault();
+            resetInputHeight(event.target as HTMLTextAreaElement);
+
             onSubmit(value);
           }
         }}

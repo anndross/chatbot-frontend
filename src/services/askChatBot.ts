@@ -4,12 +4,11 @@ import { ChatbotResponse } from "../types/chatbot.js";
 
 export async function askChatbot(
   question: string,
-  location: string,
   conversationId: string
 ): Promise<ChatbotResponse["response"] | null> {
   if (!question) return null;
 
-  const { pathname, hostname } = new URL(location);
+  const { pathname, hostname } = new URL(window.location.href);
 
   const isLocalhost = process.env.NODE_ENV === "development";
 
