@@ -1,11 +1,10 @@
-import axios from "axios";
 import { API_BASE_URL } from "./config.js";
-import { ChatbotResponse } from "../types/chatbot.js";
 
 export async function askChatbot(
   question: string,
-  conversationId: string
-): Promise<ChatbotResponse["response"] | null> {
+  conversationId: string,
+  responseHandler?: (text: string) => void
+): Promise<void | null> {
   if (!question) return null;
 
   const { pathname, hostname } = new URL(window.location.href);
@@ -18,16 +17,38 @@ export async function askChatbot(
   const storeName = onlyProd(hostname.split(".")[0]);
   const platformName = "vtex";
 
+  let text: string = "";
+
   try {
-    const { data } = await axios.post<ChatbotResponse>(`${API_BASE_URL}/chat`, {
-      question,
-      slug,
-      storeName,
-      platformName,
-      conversationId,
+    const res = await fetch(`${API_BASE_URL}/chat`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question,
+        slug,
+        storeName,
+        platformName,
+        conversationId,
+      }),
     });
 
-    return data.response;
+    const reader = res?.body?.getReader();
+    const decoder = new TextDecoder();
+
+    if (!reader) return null;
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+
+      text += decoder.decode(value, { stream: true });
+
+      console.log("texttext", text);
+      if (typeof responseHandler === "function") responseHandler(text);
+    }
   } catch (error) {
     console.error("❌ Erro ao chamar o chatbot:", error);
 

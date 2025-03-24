@@ -2,7 +2,7 @@ import { ElementType } from "react";
 import { Actions, ActionsType } from "@/types/chatbot";
 import { RecommendedProductsAction } from "./RecommendedProductsAction";
 
-interface MessageActionsProps {
+export interface MessageActionsProps {
   actions: Actions[];
 }
 

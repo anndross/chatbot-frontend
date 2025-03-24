@@ -21,7 +21,7 @@ export async function getRecommendedProducts(
   storeName: string,
   platformName: string
 ) {
-  if (!recommendedProducts.length || !storeName || !platformName) return null;
+  if (!recommendedProducts?.length || !storeName || !platformName) return null;
   console.log(
     "recommendedProducts",
     recommendedProducts,

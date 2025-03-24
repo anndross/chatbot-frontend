@@ -91,7 +91,7 @@ export function Input() {
         })}
       />
 
-      <div className="h-full justify-end p-1 items-center flex flex-col gap-2">
+      <div className="h-full self-end justify-end p-1 items-center flex flex-col gap-2">
         {!!value.length && (
           <span className="text-primary text-[10px]">
             {500 - value.length}/500

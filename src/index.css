@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
 body {
   margin: 0;
   display: flex;
@@ -20,6 +21,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
@@ -35,10 +37,6 @@ body {
   }
 }
 
-#chatbot {
-  font-family: "Outfit", sans-serif;
-}
-
 #chatbot div::-webkit-scrollbar {
   width: 4px;
 }
@@ -48,7 +46,7 @@ body {
 }
 
 #chatbot div::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #3333335d;
   border-radius: 4px;
   width: 4px;
 }
@@ -83,18 +81,115 @@ body {
   --color-tertiary: oklch(0.61 0 0);
 }
 
+.chat {
+  width: calc(100% - 40px);
+  height: 95vh;
+  padding: 21px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  transition: 500ms;
+  border-radius: 48px;
+  bottom: 20px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 16px 100px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
 @media (width >= 48rem) {
-  .md-shadow-wrapper {
+  .chat {
+    width: 400px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);
   }
 }
 
+/* Classe responsável por abrir o chat para a direita */
+.open-chat-from-left {
+  left: 0;
+  transform: translateX(20px);
+}
+
+/* Classe responsável por fechar o chat para a esquerda */
+.close-chat-to-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+/* Classe responsável por abrir o chat para a direita */
+.open-chat-from-right {
+  right: 0;
+  transform: translateX(-20px);
+}
+
+/* Classe responsável por fechar o chat para a esquerda */
+.close-chat-to-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+/* Classe responsável por abrir o chat do canto inferior direito */
+.open-chat-from-bottom-right {
+  right: 20px;
+  scale: 100%;
+  transform-origin: bottom right;
+}
+
+/* Classe responsável por fechar o chat do canto inferior esquerdo  */
+.close-chat-to-bottom-right {
+  right: 20px;
+  scale: 0;
+  transform-origin: bottom right;
+}
+
+/* Classe responsável por abrir o chat do canto inferior direito */
+.open-chat-from-bottom-left {
+  left: 20px;
+  scale: 100%;
+  transform-origin: bottom left;
+}
+
+/* Classe responsável por fechar o chat do canto inferior esquerdo  */
+.close-chat-to-bottom-left {
+  left: 20px;
+  scale: 0;
+  transform-origin: bottom left;
+}
+
 @media (width < 48rem) {
-  .shadow-wrapper {
-    box-shadow: 0 0 16px 100px rgba(0, 0, 0, 0.5);
+  .mobile-open-chat-to-bottom {
+    transform: translate(0, 0);
+    right: 20px;
+    opacity: 1;
+  }
+
+  .mobile-close-chat-to-bottom {
+    transform: translate(0, 0);
+    right: 20px;
+    left: 20px;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
 .button-shadow {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.faded-word {
+  animation-name: fadeWord;
+  animation-timing-function: ease-in-out;
+  animation-play-state: paused;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+}
+
+@keyframes fadeWord {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

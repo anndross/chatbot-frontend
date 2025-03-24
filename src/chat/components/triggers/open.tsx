@@ -86,8 +86,8 @@ const NativeOpen = () => {
       className={clsx({
         "hover:-translate-y-1 stroke-secondary hover:stroke-primary": true,
         hidden: chatbot.visible,
-        "absolute bottom-5 left-5": props?.triggerPosition === "left-bottom",
-        "absolute bottom-5 right-5": props?.triggerPosition === "right-bottom",
+        "absolute bottom-5 left-5": props?.triggerPosition === "left",
+        "absolute bottom-5 right-5": props?.triggerPosition === "right",
       })}
       onClick={() => updateChat({ visible: true })}
     >

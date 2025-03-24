@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
-import { Loading } from "../../../components/ui/loading";
 import { MessageVariant } from ".";
 
 export interface MessageWapperProps {
@@ -20,7 +19,7 @@ export function MessageWrapper({ variant, children }: MessageWapperProps) {
         "bg-tertiary rounded-tr-lg": variant === "user",
       })}
     >
-      {isLoading ? <Loading /> : children}
+      {children}
     </div>
   );
 }

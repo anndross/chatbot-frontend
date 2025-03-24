@@ -1,79 +1,38 @@
-import { useEffect, useTransition, useCallback } from "react";
-import { useChat } from "./context";
-import { Open } from "./components/triggers/open";
-import { Content } from "./components/content";
-import { Separator } from "../components/ui/separator";
-import { Close } from "./components/triggers/close";
-import { Wrapper } from "./components/wrapper";
-import { getAuthToken } from "../services/getAuthToken";
-import Cookies from "js-cookie";
-import { verifyToken } from "../services/verifyToken";
-import { askChatbot } from "../services/askChatBot";
-import { Actions, ActionsType } from "../types/chatbot";
-import { Input } from "./components/input";
+import { useEffect } from "react";
+import { useChat } from "@/chat/context";
+import { Open } from "@/chat/components/triggers/open";
+import { Content } from "@/chat/components/content";
+import { Separator } from "@/components/ui/separator";
+import { Close } from "@/chat/components/triggers/close";
+import { Wrapper } from "@/chat/components/wrapper";
+import { Input } from "@/chat/components/input";
+import { useAuth } from "@/hooks/auth";
+import { useAskToChat } from "@/hooks/askToChat";
 
 export function Chat() {
   const {
     chatbot: { messages, conversationId },
-    updateAuth,
     setChatbot,
   } = useChat();
 
-  const [isPending, startTransition] = useTransition();
+  const authenticate = useAuth();
+  const askToChat = useAskToChat();
 
   useEffect(() => {
-    setChatbot((prev) => ({ ...prev, loadingMessage: isPending }));
-  }, [isPending, setChatbot]);
-
-  const authenticate = useCallback(async () => {
-    const storedAuthToken = Cookies.get("auth_token");
-    const updateToken = (token: string | null) => updateAuth({ token });
-
-    if (storedAuthToken && verifyToken(storedAuthToken)) {
-      updateToken(storedAuthToken);
-    } else {
-      const token = await getAuthToken();
-      updateToken(token);
-    }
-  }, []);
+    setChatbot((prev) => ({
+      ...prev,
+    }));
+  }, [messages, setChatbot]);
 
   useEffect(() => {
     authenticate();
   }, [authenticate]);
 
-  const askToChat = useCallback(
-    async (message: string, conversationId: string) => {
-      startTransition(async () => {
-        const response = await askChatbot(message, conversationId);
-
-        setChatbot((prev) => ({
-          ...prev,
-          messages: [
-            ...messages,
-            {
-              type: "bot",
-              value:
-                response?.final_response || "Erro ao conectar com o chatbot.",
-              time: new Date(),
-              actions: response?.actions.map((act: ActionsType) => ({
-                type: act,
-                data:
-                  act === "recommend_product"
-                    ? response["recommended_products"]
-                    : [],
-              })) as Actions[],
-            },
-          ],
-        }));
-      });
-    },
-    [messages]
-  );
-
   useEffect(() => {
-    const lastMessage = messages[messages.length - 1];
-    if (lastMessage?.type === "user" && conversationId) {
-      askToChat(lastMessage.value, conversationId);
+    const question = messages[messages.length - 1];
+
+    if (question?.type === "user" && conversationId) {
+      askToChat(question.value);
     }
   }, [messages, conversationId, askToChat]);
 

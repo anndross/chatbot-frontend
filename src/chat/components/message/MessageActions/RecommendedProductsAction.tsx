@@ -9,11 +9,13 @@ import { AddToCartAction } from "./AddToCartAction";
 import { formatPrice } from "@/utils/format-price";
 import { useChat } from "@/chat/context";
 
+export interface RecommendedProductsActionProps {
+  data: RecommendedProductsType;
+}
+
 export function RecommendedProductsAction({
   data: recommendedProducts,
-}: {
-  data: RecommendedProductsType;
-}) {
+}: RecommendedProductsActionProps) {
   const { updateChat } = useChat();
   const [isPending, startTransition] = useTransition();
 

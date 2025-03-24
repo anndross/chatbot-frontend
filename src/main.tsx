@@ -3,9 +3,9 @@ import tailwindCSS from "./tailwind.css?inline"; // Importa o CSS gerado
 
 import ReactDOM from "react-dom/client";
 
-export type ChatPositions = "left-bottom" | "left" | "right-bottom" | "right";
+export type ChatPositions = "bottom-left" | "left" | "bottom-right" | "right";
 
-export type TriggerPositions = "left-bottom" | "right-bottom";
+export type TriggerPositions = "left" | "right";
 
 export interface MountWidgetProps {
   customInputId: string;
@@ -49,14 +49,11 @@ class AlfredBot extends HTMLElement {
 
     const chatPositions: ChatPositions[] = [
       "left",
-      "left-bottom",
+      "bottom-left",
       "right",
-      "right-bottom",
+      "bottom-right",
     ];
-    const triggerPositions: TriggerPositions[] = [
-      "left-bottom",
-      "right-bottom",
-    ];
+    const triggerPositions: TriggerPositions[] = ["left", "right"];
 
     if (!this.shadowRoot) return;
 
