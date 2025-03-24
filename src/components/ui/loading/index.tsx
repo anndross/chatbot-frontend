@@ -1,3 +1,3 @@
-export function Laoding() {
+export function Loading() {
   return <span className="loader" />;
 }

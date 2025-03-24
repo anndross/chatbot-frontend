@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { MessageVariant } from ".";
 
-interface MessageNameProps {
-  variant: MessageVariant;
+export interface MessageNameProps {
+  variant: Exclude<MessageVariant, "loading">;
 }
 
 export function MessageName({ variant }: MessageNameProps) {
@@ -10,8 +10,6 @@ export function MessageName({ variant }: MessageNameProps) {
     user: "Eu",
     bot: "AlfredBot",
   };
-
-  const isLoading = variant === "loading";
 
   return (
     <span
@@ -21,7 +19,7 @@ export function MessageName({ variant }: MessageNameProps) {
         "justify-self-end": variant === "user",
       })}
     >
-      {!isLoading && name[variant]}
+      {name[variant]}
     </span>
   );
 }

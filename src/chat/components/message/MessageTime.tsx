@@ -2,9 +2,9 @@ import clsx from "clsx";
 import dayjs from "dayjs";
 import { MessageVariant } from ".";
 
-interface MessageTimeProps {
+export interface MessageTimeProps {
   time?: Date;
-  variant: MessageVariant;
+  variant: Exclude<MessageVariant, "loading">;
 }
 
 export function MessageTime({ time, variant }: MessageTimeProps) {
