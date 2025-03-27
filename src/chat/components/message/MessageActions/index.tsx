@@ -1,4 +1,4 @@
-import { ElementType } from "react";
+import { ElementType, useEffect, useState } from "react";
 import { Actions, ActionsType } from "@/types/chatbot";
 import { RecommendedProductsAction } from "./RecommendedProductsAction";
 
@@ -7,6 +7,12 @@ export interface MessageActionsProps {
 }
 
 export function MessageActions({ actions }: MessageActionsProps) {
+  const [currentActions, setCurrentActions] = useState<Actions[]>(actions);
+
+  useEffect(() => {
+    setCurrentActions(actions);
+  }, [actions]);
+
   const mappedActions: Record<ActionsType, ElementType> = {
     recommend_product: RecommendedProductsAction,
     add_to_cart: () => <></>,
@@ -15,9 +21,9 @@ export function MessageActions({ actions }: MessageActionsProps) {
 
   return (
     <>
-      {actions.map((act) => {
+      {currentActions.map((act) => {
         const Action = mappedActions[act.type];
-        return <Action data={act.data} />;
+        return <Action key={JSON.stringify(act)} data={act.data} />;
       })}
     </>
   );

@@ -7,7 +7,7 @@ import { MessageName } from "./MessageName";
 import { MessageActions } from "./MessageActions";
 import { Loading } from "@/components/ui/loading";
 
-export type MessageVariant = "user" | "bot" | "loading";
+export type MessageVariant = "user" | "bot";
 
 export interface MessageProps {
   variant: MessageVariant;
@@ -17,7 +17,7 @@ export interface MessageProps {
 export function Message({ variant, data }: MessageProps) {
   const { value: text, time, actions } = data || {};
 
-  const isLoading = variant === "loading" || !text?.length;
+  const isLoading = !text?.length;
 
   return (
     <>
@@ -32,30 +32,7 @@ export function Message({ variant, data }: MessageProps) {
           {!isLoading && <MessageName variant={variant} />}
 
           <MessageWrapper variant={variant}>
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <Markup
-                content={
-                  variant === "bot"
-                    ? text
-                        .split(" ")
-                        .map(
-                          (word, i) =>
-                            `<span 
-                        class="faded-word" 
-                        style="animation-delay: ${
-                          i * 0.5
-                        }s; animation-play-state: running;"
-                      >
-                        ${word}
-                      </span>`
-                        )
-                        .join(" ")
-                    : text
-                }
-              />
-            )}
+            {isLoading ? <Loading /> : <Markup content={text} />}
           </MessageWrapper>
 
           {!isLoading && <MessageTime time={time} variant={variant} />}

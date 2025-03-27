@@ -30,7 +30,7 @@ export const Bot: StoryObj<MessageProps> = {
 
 export const Loading: StoryObj<MessageProps> = {
   args: {
-    variant: "loading",
+    variant: "bot",
     data: {
       time: new Date(),
       value: "",

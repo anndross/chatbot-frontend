@@ -4,16 +4,20 @@ import { useChat } from "../../context";
 import { useEffect, useRef } from "react";
 
 export function Content() {
-  const { chatbot } = useChat();
+  const {
+    chatbot: { messages },
+  } = useChat();
 
-  // mantém o scroll sempre no bottom quando recebe uma mensagem
+  const lastMessage = messages[messages.length - 1].value;
+
+  // Mantém o scroll sempre na parte inferior quando recebe uma mensagem
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (ref.current) {
       ref.current.scrollTop =
         ref.current.scrollHeight - ref.current.offsetHeight;
     }
-  }, [chatbot.messages, chatbot.loadingMessage]);
+  }, [lastMessage]);
 
   return (
     <div
@@ -22,11 +26,9 @@ export function Content() {
       })}
       ref={ref}
     >
-      {chatbot.messages.map((msg, i) => (
-        <Message key={i} variant={msg.type} data={msg} />
-      ))}
-
-      {chatbot.loadingMessage && <Message variant="loading" />}
+      {messages.map((msg, i) => {
+        return <Message key={i} variant={msg.type} data={msg} />;
+      })}
     </div>
   );
 }

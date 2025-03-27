@@ -32,9 +32,7 @@ export type ActionsType = "add_to_cart" | "see_more" | "recommend_product";
 export type RecommendedProductsType = { id: string }[];
 
 export interface ChatbotResponse {
-  response: {
-    final_response: string;
-    actions: ActionsType[] | [];
-    recommended_products: RecommendedProductsType | [];
-  };
+  final_response: string;
+  actions: ActionsType[] | [];
+  recommended_products: RecommendedProductsType | [];
 }

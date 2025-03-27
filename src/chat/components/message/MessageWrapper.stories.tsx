@@ -23,7 +23,7 @@ export const Bot: StoryObj<MessageWapperProps> = {
 
 export const Loading: StoryObj<MessageWapperProps> = {
   args: {
-    variant: "loading",
+    variant: "bot",
     children: <LoadingComponent />,
   },
 };

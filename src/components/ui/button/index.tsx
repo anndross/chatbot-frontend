@@ -23,7 +23,7 @@ export function Button({
       "text-primary hover:bg-primary hover:text-secondary bg-secondary",
     icon: "rounded-full aspect-square py-2! px-2! duration-150 hover:scale-110 hover:opacity-90",
   };
-  console.log("props.className", props.className);
+
   return (
     <button
       {...props}

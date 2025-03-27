@@ -1,15 +1,16 @@
 import { useChat } from "@/chat/context";
 import { askChatbot } from "@/services/askChatBot";
+import { ChatbotResponse } from "@/types/chatbot";
 import { useCallback } from "react";
 
 export function useAskToChat() {
   const {
-    chatbot: { messages, conversationId },
+    chatbot: { conversationId },
     setChatbot,
   } = useChat();
 
   const askToChat = useCallback(
-    async (message: string) => {
+    async (question: string) => {
       setChatbot((prev) => ({
         ...prev,
         messages: [
@@ -23,23 +24,38 @@ export function useAskToChat() {
         ],
       }));
 
-      function responseHandler(text: string) {
-        setChatbot((prev) => {
-          const lastMessage = prev.messages[prev.messages?.length - 1];
+      async function responseHandler(data: string | ChatbotResponse) {
+        if (typeof data === "string") {
+          setChatbot((prev) => {
+            const lastMessage = prev.messages[prev.messages?.length - 1];
 
-          if (lastMessage.type === "user") return prev;
+            if (lastMessage.type === "user") return prev;
 
-          lastMessage.value = text;
+            lastMessage.value = data;
 
-          return {
-            ...prev,
-          };
-        });
+            return { ...prev };
+          });
+        } else {
+          setChatbot((prev) => {
+            const lastMessage = prev.messages[prev.messages?.length - 1];
+
+            if (lastMessage.type === "user") return prev;
+
+            lastMessage.actions = [
+              {
+                type: "recommend_product",
+                data: data.recommended_products,
+              },
+            ];
+
+            return { ...prev };
+          });
+        }
       }
 
-      await askChatbot(message, conversationId, responseHandler);
+      await askChatbot(question, conversationId, responseHandler);
     },
-    [messages]
+    [conversationId, setChatbot]
   );
 
   return askToChat;

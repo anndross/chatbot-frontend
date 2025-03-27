@@ -8,13 +8,16 @@ export function useAuth() {
   const { updateAuth } = useChat();
 
   const authenticate = useCallback(async () => {
-    const storedAuthToken = Cookies.get("auth_token");
+    const storedAuthToken = Cookies.get("access_token");
     const updateToken = (token: string | null) => updateAuth({ token });
 
     if (storedAuthToken && verifyToken(storedAuthToken)) {
       updateToken(storedAuthToken);
     } else {
       const token = await getAuthToken();
+
+      if (token?.length) Cookies.set("access_token", token);
+
       updateToken(token);
     }
   }, []);

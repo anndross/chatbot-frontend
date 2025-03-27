@@ -2,11 +2,11 @@ import axios from "axios";
 import { API_BASE_URL } from "./config";
 
 type AuthTokenResponse = {
-  auth_token: string;
+  access_token: string;
 };
 
 export async function getAuthToken(): Promise<
-  AuthTokenResponse["auth_token"] | null
+  AuthTokenResponse["access_token"] | null
 > {
   try {
     const { data } = await axios.post<AuthTokenResponse>(
@@ -19,9 +19,9 @@ export async function getAuthToken(): Promise<
       }
     );
 
-    if (!data) throw new Error("Ocorreu um erro na requisição.");
+    if (!data) throw new Error("Ocorreu um erro ao tentar pegar o token.");
 
-    return data.auth_token;
+    return data.access_token;
   } catch {
     return null;
   }

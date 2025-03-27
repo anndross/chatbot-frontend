@@ -52,7 +52,7 @@ export function RecommendedProductsAction({
     <div className="mb-6">
       {products.map((product) => {
         return (
-          <MessageWrapper variant="bot">
+          <MessageWrapper key={product.itemId} variant="bot">
             <div className="w-full h-full max-h-24 flex items-center gap-4">
               <div className="relative h-full">
                 <img

@@ -12,17 +12,10 @@ import { useAskToChat } from "@/hooks/askToChat";
 export function Chat() {
   const {
     chatbot: { messages, conversationId },
-    setChatbot,
   } = useChat();
 
   const authenticate = useAuth();
   const askToChat = useAskToChat();
-
-  useEffect(() => {
-    setChatbot((prev) => ({
-      ...prev,
-    }));
-  }, [messages, setChatbot]);
 
   useEffect(() => {
     authenticate();

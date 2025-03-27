@@ -22,12 +22,7 @@ export async function getRecommendedProducts(
   platformName: string
 ) {
   if (!recommendedProducts?.length || !storeName || !platformName) return null;
-  console.log(
-    "recommendedProducts",
-    recommendedProducts,
-    storeName,
-    platformName
-  );
+
   try {
     const { data } = await axios.post<RecommendedProductsResponse>(
       `${API_BASE_URL}/recommended-products`,
