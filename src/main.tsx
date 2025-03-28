@@ -109,4 +109,33 @@ class AlfredBot extends HTMLElement {
   }
 }
 
+type CustomGlobalThis = typeof globalThis & {
+  addAlfredBot: (props: MountWidgetProps) => void;
+};
+
+(globalThis as CustomGlobalThis).addAlfredBot = (props) => {
+  const { customButtonId, customInputId, chatPosition, triggerPosition } =
+    props || {};
+
+  const alfredBot = document.createElement("alfred-bot");
+
+  if (chatPosition) {
+    alfredBot.setAttribute("chat-position", chatPosition);
+  }
+
+  if (triggerPosition) {
+    alfredBot.setAttribute("trigger-position", triggerPosition);
+  }
+
+  if (customButtonId) {
+    alfredBot.setAttribute("custom-button-id", customButtonId);
+  }
+
+  if (customInputId) {
+    alfredBot.setAttribute("custom-input-id", customInputId);
+  }
+
+  document.body.appendChild(alfredBot);
+};
+
 customElements.define("alfred-bot", AlfredBot);
