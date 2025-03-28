@@ -90,6 +90,8 @@ class AlfredBot extends HTMLElement {
       this.root = ReactDOM.createRoot(this.mountPoint);
     }
 
+    if (!window.location.pathname.endsWith("/p")) return;
+
     this.root.render(
       <Widget
         props={{

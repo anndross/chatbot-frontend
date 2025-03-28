@@ -23,9 +23,6 @@ export function RecommendedProductsAction({
     RecommendedProductsResponse["recommendedProductsData"]
   >([]);
 
-  const storeName = "casamaisfacil";
-  const platform = "vtex";
-
   useEffect(() => {
     updateChat({ loadingMessage: isPending });
   }, [isPending]);
@@ -34,9 +31,7 @@ export function RecommendedProductsAction({
     async function getProducts() {
       startTransition(async () => {
         const productsResponse = await getRecommendedProducts(
-          recommendedProducts,
-          storeName,
-          platform
+          recommendedProducts
         );
 
         if (!productsResponse) return;

@@ -1,13 +1,18 @@
 import { useChat } from "@/chat/context";
 import { askChatbot } from "@/services/askChatBot";
 import { ChatbotResponse } from "@/types/chatbot";
-import { useCallback } from "react";
+import { useCallback, useEffect, useTransition } from "react";
 
 export function useAskToChat() {
   const {
     chatbot: { conversationId },
     setChatbot,
   } = useChat();
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    setChatbot((prev) => ({ ...prev, loadingMessage: isPending }));
+  }, [isPending]);
 
   const askToChat = useCallback(
     async (question: string) => {
@@ -53,7 +58,9 @@ export function useAskToChat() {
         }
       }
 
-      await askChatbot(question, conversationId, responseHandler);
+      startTransition(async () => {
+        await askChatbot(question, conversationId, responseHandler);
+      });
     },
     [conversationId, setChatbot]
   );

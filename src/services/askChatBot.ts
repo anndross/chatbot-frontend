@@ -13,14 +13,6 @@ export async function askChatbot(
 ): Promise<void | null> {
   if (!question) return null;
 
-  const { pathname, hostname } = new URL(window.location.href);
-
-  // const isLocalhost = process.env.NODE_ENV === "development";
-
-  const slug = pathname;
-  const storeName = hostname.split(".")[0];
-  const platformName = "vtex";
-
   let text: string = "";
 
   try {
@@ -35,9 +27,6 @@ export async function askChatbot(
       },
       body: JSON.stringify({
         question,
-        slug,
-        storeName,
-        platformName,
         conversationId,
       }),
     });
@@ -82,6 +71,8 @@ export async function askChatbot(
     }
   } catch (error) {
     console.error("❌ Erro ao chamar o chatbot:", error);
+    if (typeof responseHandler === "function")
+      responseHandler("Erro ao se conectar com o chat.");
 
     return null;
   }

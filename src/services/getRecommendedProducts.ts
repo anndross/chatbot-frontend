@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "./config";
 import { RecommendedProductsType } from "../types/chatbot";
+import Cookies from "js-cookie";
 
 export type Product = {
   name: string;
@@ -17,19 +18,20 @@ export interface RecommendedProductsResponse {
 }
 
 export async function getRecommendedProducts(
-  recommendedProducts: RecommendedProductsType,
-  storeName: string,
-  platformName: string
+  recommendedProducts: RecommendedProductsType
 ) {
-  if (!recommendedProducts?.length || !storeName || !platformName) return null;
+  if (!recommendedProducts?.length) return null;
 
   try {
     const { data } = await axios.post<RecommendedProductsResponse>(
       `${API_BASE_URL}/recommended-products`,
       {
-        recommended_products: recommendedProducts,
-        storeName,
-        platformName,
+        recommendedProductsIds: recommendedProducts,
+      },
+      {
+        headers: {
+          authorization: Cookies.get("access_token"),
+        },
       }
     );
 

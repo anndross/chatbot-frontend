@@ -6,6 +6,7 @@ import { MessageTime } from "./MessageTime";
 import { MessageName } from "./MessageName";
 import { MessageActions } from "./MessageActions";
 import { Loading } from "@/components/ui/loading";
+import { useChat } from "@/chat/context";
 
 export type MessageVariant = "user" | "bot";
 
@@ -15,10 +16,14 @@ export interface MessageProps {
 }
 
 export function Message({ variant, data }: MessageProps) {
+  const {
+    chatbot: { loadingMessage },
+  } = useChat();
+
   const { value: text, time, actions } = data || {};
 
-  const isLoading = !text?.length;
-
+  const isLoading = !text?.length && loadingMessage;
+  console.log("actions", actions);
   return (
     <>
       <div className="w-full grid mb-6">

@@ -10,7 +10,7 @@ export async function getAuthToken(): Promise<
 > {
   try {
     const { data } = await axios.post<AuthTokenResponse>(
-      `${API_BASE_URL}/get-access-token`,
+      `${API_BASE_URL}/get-auth-token`,
       {
         withCredentials: true,
         headers: {

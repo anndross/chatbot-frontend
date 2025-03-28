@@ -29,7 +29,7 @@ export type Actions =
     };
 
 export type ActionsType = "add_to_cart" | "see_more" | "recommend_product";
-export type RecommendedProductsType = { id: string }[];
+export type RecommendedProductsType = string[];
 
 export interface ChatbotResponse {
   final_response: string;

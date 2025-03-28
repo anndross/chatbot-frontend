@@ -18,7 +18,7 @@ export function AddToCartAction({ product, className }: AddToCartActionProps) {
       aria-label="Adicionar produto ao carrinho"
       className={clsx("border-2! border-secondary!", className)}
       onClick={() => {
-        addProduct(product, "casamaisfacil", "vtex");
+        addProduct(product);
       }}
     >
       <div className="w-4 h-4">
