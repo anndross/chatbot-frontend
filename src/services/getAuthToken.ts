@@ -9,14 +9,8 @@ export async function getAuthToken(): Promise<
   AuthTokenResponse["access_token"] | null
 > {
   try {
-    const { data } = await axios.post<AuthTokenResponse>(
-      `${API_BASE_URL}/get-auth-token`,
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    const { data } = await axios.get<AuthTokenResponse>(
+      `${API_BASE_URL}/get-auth-token`
     );
 
     if (!data) throw new Error("Ocorreu um erro ao tentar pegar o token.");
