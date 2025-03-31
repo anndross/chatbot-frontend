@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Product } from "./getRecommendedProducts";
-import { API_BASE_URL } from "../config/baseUrl";
+import { API_BASE_URL } from "../config/apiBaseUrl";
 import { getOrderFormId } from "./getOrderFormId";
 import Cookies from "js-cookie";
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL } from "../config/baseUrl";
+import { API_BASE_URL } from "../config/apiBaseUrl";
 
 type AuthTokenResponse = {
   access_token: string;
