@@ -90,7 +90,11 @@ class AlfredBot extends HTMLElement {
       this.root = ReactDOM.createRoot(this.mountPoint);
     }
 
-    if (!window.location.pathname.endsWith("/p")) return;
+    if (
+      !window.location.pathname.endsWith("/p") &&
+      process.env.NODE_ENV !== "development"
+    )
+      return;
 
     this.root.render(
       <Widget
