@@ -28,7 +28,7 @@ export async function askChatbot(
       body: JSON.stringify({
         question,
         conversationId,
-        slug: window.location.pathname.replace(/\/p/gi, "").replace("/", ""),
+        slug: window.location.pathname.match(/\/([^\/]+)\/p/)?.[1] || "",
       }),
     });
 
