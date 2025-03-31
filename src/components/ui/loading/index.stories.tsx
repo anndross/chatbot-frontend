@@ -1,4 +1,4 @@
-import { Loading } from ".";
+import { Loading } from "@/components/ui/loading";
 
 export default {
   title: "Components/UI/Loading",

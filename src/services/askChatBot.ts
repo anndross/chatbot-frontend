@@ -1,5 +1,5 @@
-import { ChatbotResponse } from "@/types/chatbot.js";
-import { API_BASE_URL } from "../config/apiBaseUrl.js";
+import { ChatbotResponse } from "@/types/chatbot";
+import { API_BASE_URL } from "@/config/apiBaseUrl";
 import Cookies from "js-cookie";
 
 export type AskChatbotResponseHandler = (

@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react";
 import {
   RecommendedProductsAction,
   RecommendedProductsActionProps,
-} from "./RecommendedProductsAction";
+} from "@/chat/components/message/MessageActions/RecommendedProductsAction";
 
 export default {
   title: "Chat/Components/Message/Actions/RecommendedProductsAction",

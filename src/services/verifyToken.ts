@@ -1,4 +1,4 @@
-import { decodeTokenPayload } from "./decodeToken";
+import { decodeTokenPayload } from "@/services/decodeToken";
 
 export const verifyToken = (token: string) => {
   const payload = decodeTokenPayload(token);

@@ -6,8 +6,8 @@ import {
   useContext,
   useState,
 } from "react";
-import { Chatbot } from "../types/chatbot";
-import { Auth } from "../types/auth";
+import { Chatbot } from "@/types/chatbot";
+import { Auth } from "@/types/auth";
 import { MountWidgetProps } from "@/main";
 
 export type ChatContextType = {

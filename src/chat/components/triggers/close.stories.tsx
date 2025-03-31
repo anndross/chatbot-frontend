@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { Close as CloseComponent } from "./close";
+import { Close as CloseComponent } from "@/chat/components/triggers/close";
 
 export default {
   title: "Chat/Components/Triggers",

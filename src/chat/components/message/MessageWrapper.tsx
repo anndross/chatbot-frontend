@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
-import { MessageVariant } from ".";
+import { MessageVariant } from "@/chat/components/message";
 
 export interface MessageWapperProps {
   variant: MessageVariant;

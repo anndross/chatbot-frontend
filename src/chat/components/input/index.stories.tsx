@@ -1,4 +1,4 @@
-import { Input } from ".";
+import { Input } from "@/chat/components/input";
 
 export default {
   title: "Chat/Components/Input",

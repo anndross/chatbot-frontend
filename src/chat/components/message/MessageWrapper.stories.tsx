@@ -1,5 +1,8 @@
 import { StoryObj } from "@storybook/react";
-import { MessageWapperProps, MessageWrapper } from "./MessageWrapper";
+import {
+  MessageWapperProps,
+  MessageWrapper,
+} from "@/chat/components/message/MessageWrapper";
 import { Loading as LoadingComponent } from "@/components/ui/loading";
 
 export default {

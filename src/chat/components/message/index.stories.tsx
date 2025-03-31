@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { Message, MessageProps } from ".";
+import { Message, MessageProps } from "@/chat/components/message";
 
 export default {
   title: "Chat/Components/Message",

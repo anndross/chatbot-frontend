@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_BASE_URL } from "../config/apiBaseUrl";
-import { RecommendedProductsType } from "../types/chatbot";
+import { API_BASE_URL } from "@/config/apiBaseUrl";
+import { RecommendedProductsType } from "@/types/chatbot";
 import Cookies from "js-cookie";
 
 export type Product = {

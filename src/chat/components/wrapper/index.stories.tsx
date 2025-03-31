@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { Wrapper, WrapperProps } from ".";
+import { Wrapper, WrapperProps } from "@/chat/components/wrapper";
 
 export default {
   title: "Chat/Components/Wrapper",

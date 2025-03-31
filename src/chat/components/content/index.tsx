@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { Message } from "../message";
-import { useChat } from "../../context";
+import { Message } from "@/chat/components/message";
+import { useChat } from "@/chat/context";
 import { useEffect, useRef } from "react";
 
 export function Content() {

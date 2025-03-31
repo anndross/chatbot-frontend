@@ -1,4 +1,4 @@
-import { Chat } from ".";
+import { Chat } from "@/chat";
 
 export default {
   title: "Chat/Chat",

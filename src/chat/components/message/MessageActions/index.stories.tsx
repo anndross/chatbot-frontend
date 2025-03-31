@@ -1,5 +1,8 @@
 import { StoryObj } from "@storybook/react";
-import { MessageActions, MessageActionsProps } from ".";
+import {
+  MessageActions,
+  MessageActionsProps,
+} from "@/chat/components/message/MessageActions";
 
 export default {
   title: "Chat/Components/Message/Actions",

@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { Markup } from "interweave";
-import { Message as MessageType } from "../../../types/chatbot";
-import { MessageWrapper } from "./MessageWrapper";
-import { MessageTime } from "./MessageTime";
-import { MessageName } from "./MessageName";
-import { MessageActions } from "./MessageActions";
+import { Message as MessageType } from "@/types/chatbot";
+import { MessageWrapper } from "@/chat/components/message/MessageWrapper";
+import { MessageTime } from "@/chat/components/message/MessageTime";
+import { MessageName } from "@/chat/components/message/MessageName";
+import { MessageActions } from "@/chat/components/message/MessageActions";
 import { Loading } from "@/components/ui/loading";
 import { useChat } from "@/chat/context";
 

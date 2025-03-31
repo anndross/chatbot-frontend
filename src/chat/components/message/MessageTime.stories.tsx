@@ -1,5 +1,8 @@
 import { StoryObj } from "@storybook/react";
-import { MessageTime, MessageTimeProps } from "./MessageTime";
+import {
+  MessageTime,
+  MessageTimeProps,
+} from "@/chat/components/message/MessageTime";
 
 export default {
   title: "Chat/Components/Message/Time",

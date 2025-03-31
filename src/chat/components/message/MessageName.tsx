@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { MessageVariant } from ".";
+import { MessageVariant } from "@/chat/components/message";
 
 export interface MessageNameProps {
   variant: Exclude<MessageVariant, "loading">;

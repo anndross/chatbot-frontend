@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ComponentProps, ReactNode } from "react";
-import { useChat } from "../../context";
+import { useChat } from "@/chat/context";
 import { ChatPositions } from "@/main";
 
 export interface WrapperProps {

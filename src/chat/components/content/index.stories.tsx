@@ -1,4 +1,4 @@
-import { Content } from ".";
+import { Content } from "@/chat/components/content";
 
 export default {
   title: "Chat/Components/Content",

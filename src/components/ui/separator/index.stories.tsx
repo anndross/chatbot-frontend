@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { Separator, SeparatorProps } from ".";
+import { Separator, SeparatorProps } from "@/components/ui/separator";
 
 export default {
   title: "Components/UI/Separator",

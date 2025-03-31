@@ -1,5 +1,5 @@
-import Widget from "./Widget";
-import tailwindCSS from "./tailwind.css?inline"; // Importa o CSS gerado
+import Widget from "@/Widget";
+import tailwindCSS from "@/tailwind.css?inline"; // Importa o CSS gerado
 
 import ReactDOM from "react-dom/client";
 

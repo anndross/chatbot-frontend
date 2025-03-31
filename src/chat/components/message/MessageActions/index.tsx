@@ -1,6 +1,6 @@
 import { ElementType, useEffect, useState } from "react";
 import { Actions, ActionsType } from "@/types/chatbot";
-import { RecommendedProductsAction } from "./RecommendedProductsAction";
+import { RecommendedProductsAction } from "@/chat/components/message/MessageActions/RecommendedProductsAction";
 
 export interface MessageActionsProps {
   actions: Actions[];
