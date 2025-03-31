@@ -63,18 +63,23 @@ class AlfredBot extends HTMLElement {
       this.mountPoint = document.createElement("div");
 
       // Adiciona as fontes no Shadow DOM
+      const googleFontsConfig1 = document.createElement("link");
+      googleFontsConfig1.rel = "preconnect";
+      googleFontsConfig1.href = "https://fonts.googleapis.com";
+
+      const googleFontsConfig2 = document.createElement("link");
+      googleFontsConfig2.rel = "preconnect";
+      googleFontsConfig2.href = "https://fonts.gstatic.com";
+      googleFontsConfig2.crossOrigin = "crossorigin";
+
       const fontLink1 = document.createElement("link");
       fontLink1.rel = "stylesheet";
       fontLink1.href =
-        "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap";
+        "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap";
 
-      const fontLink2 = document.createElement("link");
-      fontLink2.rel = "stylesheet";
-      fontLink2.href =
-        "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap";
-
+      this.shadowRoot.appendChild(googleFontsConfig1);
+      this.shadowRoot.appendChild(googleFontsConfig2);
       this.shadowRoot.appendChild(fontLink1);
-      this.shadowRoot.appendChild(fontLink2);
 
       // Criar um <style> e sempre atualizar com o CSS gerado pelo Tailwind
       if (!this.styleElement) {

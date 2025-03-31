@@ -1104,7 +1104,6 @@ html, body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
 }
 @media (prefers-color-scheme: light) {
   :root {
@@ -1117,6 +1116,9 @@ html, body {
   button {
     background-color: #f9f9f9;
   }
+}
+#chatbot {
+  font-family: "Space Grotesk", sans-serif;
 }
 #chatbot div::-webkit-scrollbar {
   width: 4px;
