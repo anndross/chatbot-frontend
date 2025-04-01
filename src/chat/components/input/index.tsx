@@ -13,7 +13,7 @@ export function Input() {
 
   const [value, setValue] = useState<string>("");
 
-  const inputMaxLength: number = 500;
+  const inputMaxLength: number = 500000;
 
   const onSubmit = useDebounce((value: string) => {
     if (!value.length || loadingMessage) return;
