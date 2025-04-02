@@ -26,24 +26,28 @@ export function Message({ variant, data }: MessageProps) {
   console.log("actions", actions);
   return (
     <>
-      <div className="w-full grid mb-6">
-        <div
-          className={clsx({
-            "w-fit grid": true,
-            "justify-self-start": variant === "bot",
-            "justify-self-end": variant === "user",
-          })}
-        >
-          {!isLoading && <MessageName variant={variant} />}
+      {(!!text?.length || loadingMessage) && (
+        <>
+          <div className="w-full grid mb-6">
+            <div
+              className={clsx({
+                "w-fit grid": true,
+                "justify-self-start": variant === "bot",
+                "justify-self-end": variant === "user",
+              })}
+            >
+              {!isLoading && <MessageName variant={variant} />}
 
-          <MessageWrapper variant={variant}>
-            {isLoading ? <Loading /> : <Markup content={text} />}
-          </MessageWrapper>
+              <MessageWrapper variant={variant}>
+                {isLoading ? <Loading /> : <Markup content={text} />}
+              </MessageWrapper>
 
-          {!isLoading && <MessageTime time={time} variant={variant} />}
-        </div>
-      </div>
-      {actions && <MessageActions actions={actions} />}
+              {!isLoading && <MessageTime time={time} variant={variant} />}
+            </div>
+          </div>
+          {actions && <MessageActions actions={actions} />}
+        </>
+      )}
     </>
   );
 }

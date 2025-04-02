@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 
 export function Content() {
   const {
-    chatbot: { messages },
+    chatbot: { messages, loadingMessage },
   } = useChat();
 
   const lastMessage = messages[messages.length - 1].value;
@@ -17,7 +17,7 @@ export function Content() {
       ref.current.scrollTop =
         ref.current.scrollHeight - ref.current.offsetHeight;
     }
-  }, [lastMessage]);
+  }, [lastMessage, loadingMessage]);
 
   return (
     <div
