@@ -40,7 +40,7 @@ export function Input() {
   return (
     <div
       className={clsx(
-        "w-full h-auto min-h-[40px] py-2 px-2 flex justify-between items-center bg-secondary rounded-4xl duration-300",
+        "w-full h-auto min-h-[40px] py-2 px-3 flex justify-between items-center bg-secondary rounded-4xl duration-300",
         { "py-3!": value.length }
       )}
     >
@@ -63,7 +63,7 @@ export function Input() {
       />
       <div className="h-full self-end justify-end p-1 items-center flex flex-col gap-2">
         {!!value.length && (
-          <span className="text-primary text-[10px]">
+          <span className="text-primary text-[10px] whitespace-nowrap">
             {inputMaxLength - value.length}/{inputMaxLength}
           </span>
         )}

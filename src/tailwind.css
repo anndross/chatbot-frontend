@@ -635,6 +635,9 @@
   .px-2\! {
     padding-inline: calc(var(--spacing) * 2) !important;
   }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
   }
@@ -658,9 +661,6 @@
   }
   .py-3\! {
     padding-block: calc(var(--spacing) * 3) !important;
-  }
-  .py-4 {
-    padding-block: calc(var(--spacing) * 4);
   }
   .py-\[19\.5px\] {
     padding-block: 19.5px;
@@ -700,9 +700,6 @@
   }
   .pl-px {
     padding-left: 1px;
-  }
-  .text-start {
-    text-align: start;
   }
   .indent-px {
     text-indent: 1px;
@@ -762,6 +759,12 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .text-nowrap {
+    text-wrap: nowrap;
+  }
+  .text-wrap {
+    text-wrap: wrap;
+  }
   .overflow-ellipsis {
     text-overflow: ellipsis;
   }
@@ -770,6 +773,9 @@
   }
   .text-ellipsis {
     text-overflow: ellipsis;
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
   }
   .text-neutral-500 {
     color: var(--color-neutral-500);
