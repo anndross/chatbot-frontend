@@ -24,7 +24,13 @@ export function Open() {
       ) as HTMLInputElement;
       const value = input?.value;
 
-      if (!value.length) return;
+      if (!value.length) {
+        setChatbot((prev) => ({
+          ...prev,
+          visible: true,
+        }));
+        return;
+      }
 
       setChatbot((prev) => ({
         ...prev,
