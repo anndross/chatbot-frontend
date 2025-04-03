@@ -4,6 +4,10 @@ import { useChat } from "@/chat/context";
 import ChatSVG from "@/assets/chat.svg";
 import { useEffect } from "react";
 
+type WindowWithChatWasOpenProps = typeof globalThis & {
+  chatWasOpen?: boolean;
+};
+
 export function Open() {
   const {
     props,
@@ -35,6 +39,14 @@ export function Open() {
       if (event.key === "Enter") triggerChatWithMessage();
     }
 
+    function openChatByInputFocus() {
+      if ((window as WindowWithChatWasOpenProps)?.chatWasOpen) return;
+
+      setChatbot((prev) => ({ ...prev, visible: true }));
+
+      (window as WindowWithChatWasOpenProps).chatWasOpen = true;
+    }
+
     function triggerChat() {
       setChatbot((prev) => ({ ...prev, visible: true }));
     }
@@ -49,12 +61,15 @@ export function Open() {
       button.removeEventListener("click", triggerChatWithMessage);
       button.removeEventListener("click", triggerChat);
 
-      if (input)
+      if (input) {
         input.removeEventListener("keyup", triggerChatWithMessageByEnter);
+        input.removeEventListener("focus", openChatByInputFocus);
+      }
 
       if (input && !loadingMessage) {
         button.addEventListener("click", triggerChatWithMessage);
         input.addEventListener("keyup", triggerChatWithMessageByEnter);
+        input.addEventListener("focus", openChatByInputFocus);
       } else {
         button.addEventListener("click", triggerChat);
       }

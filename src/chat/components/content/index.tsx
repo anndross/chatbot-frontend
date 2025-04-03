@@ -2,13 +2,16 @@ import clsx from "clsx";
 import { Message } from "@/chat/components/message";
 import { useChat } from "@/chat/context";
 import { useEffect, useRef } from "react";
+import { useDebounce } from "@/utils/debounce";
 
 export function Content() {
   const {
-    chatbot: { messages, loadingMessage },
+    chatbot: { messages, loadingMessage, visible },
+    setChatbot,
+    props,
   } = useChat();
 
-  const lastMessage = messages[messages.length - 1].value;
+  const lastMessage = messages[messages.length - 1]?.value;
 
   // Mantém o scroll sempre na parte inferior quando recebe uma mensagem
   const ref = useRef<HTMLDivElement>(null);
@@ -18,6 +21,48 @@ export function Content() {
         ref.current.scrollHeight - ref.current.offsetHeight;
     }
   }, [lastMessage, loadingMessage]);
+
+  const wasAnimatedRef = useRef(false);
+
+  const defaultMessage =
+    "Olá! 👋 Para te ajudar da melhor forma, você pode seguir o exemplo abaixo na sua pergunta:\n\n🛠️ Exemplo: Estou reformando meu espaço e preciso cobrir 200m² com este produto. Quantas unidades devo comprar? 🤔";
+
+  const message =
+    (props?.customInitialMessage || defaultMessage).match(/[^\n]|\n/g) || [];
+
+  const timeToType = 10;
+
+  const enableUserToType = useDebounce(() => {
+    setChatbot((prev) => ({ ...prev, loadingMessage: false }));
+  }, message.length * timeToType);
+
+  useEffect(() => {
+    function animateFirstMessage() {
+      message.forEach((letter, index) => {
+        setTimeout(() => {
+          setChatbot((prev) => ({
+            ...prev,
+            messages: [
+              {
+                time: new Date(),
+                type: "bot",
+                actions: [],
+                value: (prev.messages?.[0]?.value || "") + letter,
+              },
+            ],
+            loadingMessage: true,
+          }));
+        }, index * timeToType); // Adiciona um atraso crescente a cada letra
+      });
+
+      enableUserToType();
+    }
+
+    if (visible && !wasAnimatedRef.current) {
+      animateFirstMessage();
+      wasAnimatedRef.current = true;
+    }
+  }, [visible]);
 
   return (
     <div

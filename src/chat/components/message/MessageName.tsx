@@ -8,7 +8,7 @@ export interface MessageNameProps {
 export function MessageName({ variant }: MessageNameProps) {
   const name: Record<Exclude<MessageVariant, "loading">, string> = {
     user: "Eu",
-    bot: "AlfredBot",
+    bot: "Bot",
   };
 
   return (

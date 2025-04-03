@@ -4,6 +4,7 @@ import {
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { Chatbot } from "@/types/chatbot";
@@ -25,14 +26,7 @@ const ChatContext = createContext<ChatContextType>({
   chatbot: {
     visible: false,
     loadingMessage: false,
-    messages: [
-      {
-        type: "bot",
-        value:
-          "Oi, estou aqui para te ajudar e fornecer informações sobre esse produto :)",
-        time: new Date(),
-      },
-    ],
+    messages: [],
     conversationId: "",
   },
   auth: {
@@ -53,14 +47,7 @@ export function ChatProvider({ children, props }: ChatProviderProps) {
   const [chatbot, setChatbot] = useState<Chatbot>({
     visible: false,
     loadingMessage: false,
-    messages: [
-      {
-        type: "bot",
-        value:
-          "Oi, estou aqui para te ajudar e fornecer informações sobre esse produto :)",
-        time: new Date(),
-      },
-    ],
+    messages: [],
     conversationId: crypto.randomUUID(),
   });
 

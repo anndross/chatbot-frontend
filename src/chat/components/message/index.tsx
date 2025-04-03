@@ -23,7 +23,7 @@ export function Message({ variant, data }: MessageProps) {
   const { value: text, time, actions } = data || {};
 
   const isLoading = !text?.length && loadingMessage;
-  console.log("actions", actions);
+
   return (
     <>
       {(!!text?.length || loadingMessage) && (

@@ -8,8 +8,9 @@ export type ChatPositions = "bottom-left" | "left" | "bottom-right" | "right";
 export type TriggerPositions = "left" | "right";
 
 export interface MountWidgetProps {
-  customInputId: string;
-  customButtonId: string;
+  customInputId?: string;
+  customButtonId?: string;
+  customInitialMessage?: string;
   chatPosition?: ChatPositions;
   triggerPosition?: TriggerPositions;
 }
@@ -19,6 +20,7 @@ class AlfredBot extends HTMLElement {
     return [
       "custom-input-id",
       "custom-button-id",
+      "custom-inital-message",
       "chat-position",
       "trigger-position",
     ];
@@ -44,6 +46,8 @@ class AlfredBot extends HTMLElement {
   render() {
     const customInputId = this.getAttribute("custom-input-id") || "";
     const customButtonId = this.getAttribute("custom-button-id") || "";
+    const customInitialMessage =
+      this.getAttribute("custom-initial-message") || "";
     const chatPosition = this.getAttribute("chat-position") || "";
     const triggerPosition = this.getAttribute("trigger-position") || "";
 
@@ -106,6 +110,7 @@ class AlfredBot extends HTMLElement {
         props={{
           customInputId,
           customButtonId,
+          customInitialMessage,
           ...(chatPositions.includes(chatPosition as ChatPositions)
             ? { chatPosition: chatPosition as TriggerPositions }
             : {}),

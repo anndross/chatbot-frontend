@@ -8,7 +8,7 @@ import SubmitSVG from "@/assets/submit.svg";
 export function Input() {
   const {
     setChatbot,
-    chatbot: { loadingMessage },
+    chatbot: { loadingMessage, visible },
   } = useChat();
 
   const [value, setValue] = useState("");
@@ -36,6 +36,12 @@ export function Input() {
 
     setValue("");
   }, 300);
+
+  useEffect(() => {
+    if (textareaRef.current && visible) {
+      textareaRef.current.focus();
+    }
+  }, [textareaRef, visible]);
 
   return (
     <div
@@ -73,7 +79,11 @@ export function Input() {
           className="w-10 h-10"
           onlyIcon
         >
-          <SubmitSVG />
+          {loadingMessage ? (
+            <div className="h-3 w-3 bg-secondary" />
+          ) : (
+            <SubmitSVG />
+          )}
         </Button>
       </div>
     </div>
