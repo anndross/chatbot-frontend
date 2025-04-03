@@ -86,7 +86,7 @@ body {
 
 .chat {
   width: calc(100% - 40px);
-  height: 95vh;
+  height: 95dvh;
   padding: 21px;
   padding-bottom: 24px;
   display: flex;
