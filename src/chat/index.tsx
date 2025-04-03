@@ -8,6 +8,7 @@ import { Wrapper } from "@/chat/components/wrapper";
 import { Input } from "@/chat/components/input";
 import { useAuth } from "@/hooks/auth";
 import { useAskToChat } from "@/hooks/askToChat";
+import { MobileOverlay } from "@/chat/components/MobileOverlay";
 
 export function Chat() {
   const {
@@ -31,17 +32,19 @@ export function Chat() {
 
   return (
     <>
-      <Wrapper>
-        <div className="flex justify-between items-end pt-3 pb-[22px]">
-          <h2 className="text-secondary font-bold text-2xl">AlfredBot</h2>
-          <Close />
-        </div>
-        <Separator />
-        <Content />
-        <div className="rounded-b-4xl bg-primary w-full h-auto flex items-center justify-center">
-          <Input />
-        </div>
-      </Wrapper>
+      <MobileOverlay>
+        <Wrapper>
+          <div className="flex justify-between items-end pt-3 pb-[22px]">
+            <h2 className="text-secondary font-bold text-2xl">AlfredBot</h2>
+            <Close />
+          </div>
+          <Separator />
+          <Content />
+          <div className="rounded-b-4xl bg-primary w-full h-auto flex items-center justify-center">
+            <Input />
+          </div>
+        </Wrapper>
+      </MobileOverlay>
       <Open />
     </>
   );

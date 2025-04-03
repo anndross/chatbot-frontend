@@ -96,7 +96,6 @@ body {
   border-radius: 48px;
   bottom: 20px;
   background-color: var(--color-primary);
-  box-shadow: 0 0 16px 100px rgba(0, 0, 0, 0.5);
   z-index: 9999;
   border: 1px solid #cccccca2;
 }
