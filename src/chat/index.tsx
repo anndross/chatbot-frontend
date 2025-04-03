@@ -35,7 +35,9 @@ export function Chat() {
       <MobileOverlay>
         <Wrapper>
           <div className="flex justify-between items-end pt-3 pb-[22px]">
-            <h2 className="text-secondary font-bold text-2xl">Chat</h2>
+            <h2 className="text-secondary font-bold text-2xl">
+              Vamos conversar?
+            </h2>
             <Close />
           </div>
           <Separator />
