@@ -4,6 +4,10 @@ import { useChat } from "@/chat/context";
 import { useEffect, useRef } from "react";
 import { useDebounce } from "@/utils/debounce";
 
+export type WindowWithInitialChatResponse = typeof window & {
+  initialChatResponse: boolean;
+};
+
 export function Content() {
   const {
     chatbot: { messages, loadingMessage, visible },
@@ -21,8 +25,6 @@ export function Content() {
         ref.current.scrollHeight - ref.current.offsetHeight;
     }
   }, [lastMessage, loadingMessage]);
-
-  const wasAnimatedRef = useRef(false);
 
   const defaultMessage =
     "Olá! 👋 Para te ajudar da melhor forma, você pode seguir o exemplo abaixo na sua pergunta:\n\n🛠️ Exemplo: Estou reformando meu espaço e preciso cobrir 200m² com este produto. Quantas unidades devo comprar? 🤔";
@@ -60,9 +62,12 @@ export function Content() {
       enableUserToType();
     }
 
-    if (visible && !wasAnimatedRef.current) {
+    if (
+      visible &&
+      !(window as WindowWithInitialChatResponse).initialChatResponse
+    ) {
       animateFirstMessage();
-      wasAnimatedRef.current = true;
+      (window as WindowWithInitialChatResponse).initialChatResponse = true;
     }
   }, [visible]);
 
