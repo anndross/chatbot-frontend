@@ -47,7 +47,9 @@ export function Content() {
                 time: new Date(),
                 type: "bot",
                 actions: [],
-                value: (prev.messages?.[0]?.value || "") + letter,
+                value:
+                  (prev.messages.filter((msg) => msg.type === "bot")?.[0]
+                    ?.value || "") + letter,
               },
             ],
             loadingMessage: true,

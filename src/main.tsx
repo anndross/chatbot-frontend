@@ -149,6 +149,9 @@ type CustomGlobalThis = typeof globalThis & {
     alfredBot.setAttribute("custom-input-id", customInputId);
   }
 
+  // mantém a tag sobreposta aos elementos da página em que está inserida
+  alfredBot.style = "position: relative; z-index: 9999;";
+
   document.body.appendChild(alfredBot);
 };
 
