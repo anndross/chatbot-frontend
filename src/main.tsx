@@ -150,7 +150,8 @@ type CustomGlobalThis = typeof globalThis & {
   }
 
   // mantém a tag sobreposta aos elementos da página em que está inserida
-  alfredBot.style = "position: relative; z-index: 9999;";
+  alfredBot.style.position = "relative";
+  alfredBot.style.zIndex = "9999";
 
   document.body.appendChild(alfredBot);
 };
