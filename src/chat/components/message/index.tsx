@@ -7,6 +7,7 @@ import { MessageName } from "@/chat/components/message/MessageName";
 import { MessageActions } from "@/chat/components/message/MessageActions";
 import { Loading } from "@/components/ui/loading";
 import { useChat } from "@/chat/context";
+import { AnswerEvaluation } from "./MessageActions/AnswerEvaluation";
 
 export type MessageVariant = "user" | "bot";
 
@@ -48,6 +49,24 @@ export function Message({ variant, data }: MessageProps) {
           {actions && <MessageActions actions={actions} />}
         </>
       )}
+      <div className="w-full grid mb-6">
+        <div
+          className={clsx({
+            "w-fit grid": true,
+            "justify-self-start": variant === "bot",
+            "justify-self-end": variant === "user",
+          })}
+        >
+          {!isLoading && <MessageName variant={variant} />}
+
+          <MessageWrapper variant={variant}>
+            Gostou da interação com o chat?
+            <AnswerEvaluation data={{ ...data, type: variant }} />
+          </MessageWrapper>
+
+          {!isLoading && <MessageTime time={time} variant={variant} />}
+        </div>
+      </div>
     </>
   );
 }
