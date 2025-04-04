@@ -123,6 +123,8 @@ class AlfredBot extends HTMLElement {
   }
 }
 
+customElements.define("alfred-bot", AlfredBot);
+
 type CustomGlobalThis = typeof globalThis & {
   addAlfredBot: (props: MountWidgetProps) => void;
 };
@@ -164,5 +166,3 @@ type CustomGlobalThis = typeof globalThis & {
 
   document.body.appendChild(alfredBot);
 };
-
-customElements.define("alfred-bot", AlfredBot);
