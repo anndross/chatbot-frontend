@@ -128,8 +128,13 @@ type CustomGlobalThis = typeof globalThis & {
 };
 
 (globalThis as CustomGlobalThis).addAlfredBot = (props) => {
-  const { customButtonId, customInputId, chatPosition, triggerPosition } =
-    props || {};
+  const {
+    customButtonId,
+    customInputId,
+    customInitialMessage,
+    chatPosition,
+    triggerPosition,
+  } = props || {};
 
   const alfredBot = document.createElement("alfred-bot");
 
@@ -149,8 +154,12 @@ type CustomGlobalThis = typeof globalThis & {
     alfredBot.setAttribute("custom-input-id", customInputId);
   }
 
+  if (customInitialMessage) {
+    alfredBot.setAttribute("custom-initial-message", customInitialMessage);
+  }
+
   // mantém a tag sobreposta aos elementos da página em que está inserida
-  alfredBot.style.position = "relative";
+  alfredBot.style.position = "fixed";
   alfredBot.style.zIndex = "9999";
 
   document.body.appendChild(alfredBot);

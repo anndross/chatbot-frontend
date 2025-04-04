@@ -9,6 +9,7 @@ import {
 import { Chatbot } from "@/types/chatbot";
 import { Auth } from "@/types/auth";
 import { MountWidgetProps } from "@/main";
+import { v4 as uuidv4 } from "uuid";
 
 export type ChatContextType = {
   props?: MountWidgetProps;
@@ -47,7 +48,7 @@ export function ChatProvider({ children, props }: ChatProviderProps) {
     visible: false,
     loadingMessage: false,
     messages: [],
-    conversationId: crypto.randomUUID(),
+    conversationId: uuidv4(),
   });
 
   const [auth, setAuth] = useState<Auth>({

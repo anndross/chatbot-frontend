@@ -42,7 +42,7 @@ export function Wrapper({ children }: WrapperProps) {
         [`${mappedOpenStyles.default}`]: true,
         [`${mappedOpenStyles[chatPosition]}`]: visible,
         [`${mappedCloseStyles[chatPosition]}`]: !visible,
-        "mobile-open-chat-to-bottom": visible,
+        "mobile-open-chat-from-bottom": visible,
         "mobile-close-chat-to-bottom": !visible,
       })}
     >
