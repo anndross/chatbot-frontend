@@ -50,7 +50,7 @@ export function Conversation() {
 
   useEffect(() => {
     if (
-      downtimeInSeconds > 8 &&
+      downtimeInSeconds > 20 &&
       visible &&
       !window.localStorage.getItem("hasRatedChatbot")
     ) {
