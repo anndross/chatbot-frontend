@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
-import { MessageVariant } from "@/chat/components/message";
+import { MessageVariant } from "@/chat/components/conversation/message";
 
 export interface MessageTimeProps {
   time?: Date;

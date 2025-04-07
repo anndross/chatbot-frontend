@@ -3,15 +3,17 @@ export type Chatbot = {
   messages: Message[];
   conversationId: string;
   loadingMessage: boolean;
+  downtimeInSeconds: number;
 };
 
 export type MessageType = "user" | "bot";
 
 export type Message = {
+  id: string;
   type: MessageType;
   value: string;
   time: Date;
-  actions?: Actions[];
+  action?: Actions;
 };
 
 export type Actions =
@@ -26,9 +28,18 @@ export type Actions =
   | {
       type: "see_more";
       data: undefined | [];
+    }
+  | {
+      type: "rating";
+      data: undefined | [];
     };
 
-export type ActionsType = "add_to_cart" | "see_more" | "recommend_product";
+export type ActionsType =
+  | "add_to_cart"
+  | "see_more"
+  | "recommend_product"
+  | "rating";
+
 export type RecommendedProductsType = string[];
 
 export interface ChatbotResponse {

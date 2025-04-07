@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react";
 import {
   MessageWapperProps,
   MessageWrapper,
-} from "@/chat/components/message/MessageWrapper";
+} from "@/chat/components/conversation/message/wrapper";
 import { Loading as LoadingComponent } from "@/components/ui/loading";
 
 export default {

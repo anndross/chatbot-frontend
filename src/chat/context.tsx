@@ -28,6 +28,7 @@ const ChatContext = createContext<ChatContextType>({
     loadingMessage: false,
     messages: [],
     conversationId: "",
+    downtimeInSeconds: 0,
   },
   auth: {
     token: "",
@@ -49,6 +50,7 @@ export function ChatProvider({ children, props }: ChatProviderProps) {
     loadingMessage: false,
     messages: [],
     conversationId: uuidv4(),
+    downtimeInSeconds: 0,
   });
 
   const [auth, setAuth] = useState<Auth>({

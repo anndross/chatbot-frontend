@@ -2,6 +2,7 @@ import { useChat } from "@/chat/context";
 import { askChatbot } from "@/services/askChatBot";
 import { ChatbotResponse } from "@/types/chatbot";
 import { useCallback, useEffect, useTransition } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export function useAskToChat() {
   const {
@@ -23,6 +24,7 @@ export function useAskToChat() {
           {
             type: "bot",
             value: "",
+            id: uuidv4(),
             time: new Date(),
             actions: [],
           },
@@ -46,12 +48,10 @@ export function useAskToChat() {
 
             if (lastMessage.type === "user") return prev;
 
-            lastMessage.actions = [
-              {
-                type: "recommend_product",
-                data: data.recommended_products,
-              },
-            ];
+            lastMessage.action = {
+              type: "recommend_product",
+              data: data.recommended_products,
+            };
 
             return { ...prev };
           });
@@ -67,11 +67,3 @@ export function useAskToChat() {
 
   return askToChat;
 }
-
-// response?.actions.map((act: ActionsType) => ({
-//     type: act,
-//     data:
-//       act === "recommend_product"
-//         ? response["recommended_products"]
-//         : [],
-//   })) as Actions[]

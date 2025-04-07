@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { MessageVariant } from "@/chat/components/message";
+import { MessageVariant } from "@/chat/components/conversation/message";
 
 export interface MessageNameProps {
   variant: Exclude<MessageVariant, "loading">;
@@ -14,7 +14,7 @@ export function MessageName({ variant }: MessageNameProps) {
   return (
     <span
       className={clsx({
-        "text-base text-neutral-700 mb-2 font-medium": true,
+        "text-base text-neutral-700 mt-3 mb-2 font-medium": true,
         "justify-self-start": variant === "bot",
         "justify-self-end": variant === "user",
       })}

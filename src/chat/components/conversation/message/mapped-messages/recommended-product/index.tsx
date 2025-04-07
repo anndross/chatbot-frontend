@@ -4,8 +4,8 @@ import {
 } from "@/services/getRecommendedProducts";
 import { RecommendedProductsType } from "@/types/chatbot";
 import { useEffect, useState, useTransition } from "react";
-import { MessageWrapper } from "@/chat/components/message/MessageWrapper";
-import { AddToCartAction } from "@/chat/components/message/MessageActions/AddToCartAction";
+import { MessageWrapper } from "@/chat/components/conversation/message/wrapper";
+import { AddToCartAction } from "@/chat/components/conversation/message/mapped-messages/add-to-cart";
 import { formatPrice } from "@/utils/format-price";
 import { useChat } from "@/chat/context";
 

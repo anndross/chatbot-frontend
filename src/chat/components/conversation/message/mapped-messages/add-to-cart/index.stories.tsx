@@ -1,4 +1,4 @@
-import { AddToCartAction } from "@/chat/components/message/MessageActions/AddToCartAction";
+import { AddToCartAction } from "@/chat/components/conversation/message/mapped-messages/AddToCartAction";
 
 export default {
   title: "Chat/Components/Message/Actions/AddToCartAction",

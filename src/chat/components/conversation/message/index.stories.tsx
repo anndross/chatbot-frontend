@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { Message, MessageProps } from "@/chat/components/message";
+import { Message, MessageProps } from "@/chat/components/conversation/message";
 
 export default {
   title: "Chat/Components/Message",
@@ -12,7 +12,6 @@ export const User: StoryObj<MessageProps> = {
     data: {
       time: new Date(),
       value: "Mensagem do usuário.",
-      actions: [],
     },
   },
 };
@@ -23,7 +22,6 @@ export const Bot: StoryObj<MessageProps> = {
     data: {
       time: new Date(),
       value: "Mensagem do bot.",
-      actions: [],
     },
   },
 };
@@ -34,7 +32,6 @@ export const Loading: StoryObj<MessageProps> = {
     data: {
       time: new Date(),
       value: "",
-      actions: [],
     },
   },
 };

@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react";
 import {
   MessageTime,
   MessageTimeProps,
-} from "@/chat/components/message/MessageTime";
+} from "@/chat/components/conversation/message/time";
 
 export default {
   title: "Chat/Components/Message/Time",

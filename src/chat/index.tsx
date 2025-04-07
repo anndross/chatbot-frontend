@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { useChat } from "@/chat/context";
 import { Open } from "@/chat/components/triggers/open";
-import { Content } from "@/chat/components/content";
+import { Conversation } from "@/chat/components/conversation";
 import { Separator } from "@/components/ui/separator";
 import { Close } from "@/chat/components/triggers/close";
 import { Wrapper } from "@/chat/components/wrapper";
 import { Input } from "@/chat/components/input";
 import { useAuth } from "@/hooks/auth";
 import { useAskToChat } from "@/hooks/askToChat";
-import { MobileOverlay } from "@/chat/components/MobileOverlay";
 
 export function Chat() {
   const {
@@ -20,6 +19,8 @@ export function Chat() {
 
   useEffect(() => {
     authenticate();
+
+    return () => {};
   }, [authenticate]);
 
   useEffect(() => {
@@ -32,21 +33,23 @@ export function Chat() {
 
   return (
     <>
-      <MobileOverlay>
-        <Wrapper>
-          <div className="flex justify-between items-end pt-3 pb-[22px]">
-            <h2 className="text-secondary font-bold text-2xl">
-              Vamos conversar?
-            </h2>
-            <Close />
-          </div>
-          <Separator />
-          <Content />
-          <div className="rounded-b-4xl bg-primary w-full h-auto flex items-center justify-center">
-            <Input />
-          </div>
-        </Wrapper>
-      </MobileOverlay>
+      <Wrapper>
+        <div className="flex justify-between items-end pt-3 pb-[22px]">
+          <h2 className="text-secondary font-bold text-2xl">
+            Vamos conversar?
+          </h2>
+          <Close />
+        </div>
+
+        <Separator />
+
+        <Conversation />
+
+        <div className="rounded-b-4xl bg-primary w-full h-auto flex items-center justify-center">
+          <Input />
+        </div>
+      </Wrapper>
+
       <Open />
     </>
   );

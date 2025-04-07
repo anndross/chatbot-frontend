@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react";
 import {
   MessageName,
   MessageNameProps,
-} from "@/chat/components/message/MessageName";
+} from "@/chat/components/conversation/message/name";
 
 export default {
   title: "Chat/Components/Message/Name",

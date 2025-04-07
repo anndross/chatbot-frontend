@@ -4,14 +4,16 @@ import { Button } from "@/components/ui/button";
 import { useChat } from "@/chat/context";
 import { useDebounce } from "@/utils/debounce";
 import SubmitSVG from "@/assets/submit.svg";
+import { v4 as uuidv4 } from "uuid";
 
 export function Input() {
   const {
     setChatbot,
-    chatbot: { loadingMessage, visible },
+    chatbot: { loadingMessage, visible, downtimeInSeconds },
   } = useChat();
 
   const [value, setValue] = useState("");
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const inputMaxLength = 500;
 
@@ -30,7 +32,7 @@ export function Input() {
       ...prev,
       messages: [
         ...prev.messages,
-        { type: "user", value: message, time: new Date() },
+        { type: "user", value: message, time: new Date(), id: uuidv4() },
       ],
     }));
 
@@ -42,6 +44,28 @@ export function Input() {
       textareaRef.current.focus();
     }
   }, [textareaRef, visible]);
+
+  useEffect(() => {
+    let interval = null;
+
+    if (window.localStorage.getItem("hasRatedChatbot")) return;
+
+    if (visible) {
+      interval = setInterval(() => {
+        setChatbot((prev) => ({
+          ...prev,
+          downtimeInSeconds: prev.downtimeInSeconds + 1,
+        }));
+      }, 1000);
+    }
+
+    return () => {
+      if (visible && interval) {
+        clearInterval(interval);
+      }
+      setChatbot((prev) => ({ ...prev, downtimeInSeconds: 0 }));
+    };
+  }, [loadingMessage, visible, value]);
 
   return (
     <div
