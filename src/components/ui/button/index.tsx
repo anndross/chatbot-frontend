@@ -21,7 +21,7 @@ export function Button({
     secondary:
       "text-primary hover:bg-primary hover:text-secondary bg-secondary",
     icon: "rounded-full aspect-square py-2! px-2! duration-150 hover:scale-110 hover:opacity-90",
-    disabled: "opacity-80 cursor-not-allowed",
+    disabled: "opacity-50 cursor-not-allowed",
   };
 
   return (
