@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 export function Input() {
   const {
     setChatbot,
-    chatbot: { loadingMessage, visible, downtimeInSeconds },
+    chatbot: { loadingMessage, visible },
   } = useChat();
 
   const [value, setValue] = useState("");
