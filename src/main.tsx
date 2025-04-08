@@ -23,6 +23,9 @@ class AlfredBot extends HTMLElement {
       "custom-inital-message",
       "chat-position",
       "trigger-position",
+      "theme-color-primary",
+      "theme-color-secondary",
+      "theme-color-tertiary",
     ];
   }
 
@@ -50,6 +53,10 @@ class AlfredBot extends HTMLElement {
       this.getAttribute("custom-initial-message") || "";
     const chatPosition = this.getAttribute("chat-position") || "";
     const triggerPosition = this.getAttribute("trigger-position") || "";
+    const themeColorPrimary = this.getAttribute("theme-color-primary") || "";
+    const themeColorSecondary =
+      this.getAttribute("theme-color-secondary") || "";
+    const themeColorTertiary = this.getAttribute("theme-color-tertiary") || "";
 
     const chatPositions: ChatPositions[] = [
       "left",
@@ -94,6 +101,20 @@ class AlfredBot extends HTMLElement {
 
       this.shadowRoot.appendChild(this.mountPoint);
     }
+
+    const rootHost = document.querySelector("alfred-bot") as HTMLElement;
+
+    // Define a cor primária do produto
+    themeColorPrimary &&
+      rootHost?.style?.setProperty("--color-primary", themeColorPrimary);
+
+    // Define a cor secondária do produto
+    themeColorSecondary &&
+      rootHost?.style?.setProperty("--color-secondary", themeColorSecondary);
+
+    // Define a cor terciária do produto
+    themeColorTertiary &&
+      rootHost?.style?.setProperty("--color-tertiary", themeColorTertiary);
 
     if (!this.root) {
       this.root = ReactDOM.createRoot(this.mountPoint);

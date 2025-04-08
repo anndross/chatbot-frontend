@@ -49,8 +49,10 @@ export function Conversation() {
   }, [visible]);
 
   useEffect(() => {
+    const timeToShowRatingInSeconds = 20;
+
     if (
-      downtimeInSeconds > 20 &&
+      downtimeInSeconds > timeToShowRatingInSeconds &&
       visible &&
       !window.localStorage.getItem("hasRatedChatbot")
     ) {

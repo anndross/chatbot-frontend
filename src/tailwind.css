@@ -6,9 +6,8 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-zinc-500: oklch(0.552 0.016 285.938);
     --color-neutral-400: oklch(0.708 0 0);
-    --color-neutral-500: oklch(0.556 0 0);
-    --color-neutral-700: oklch(0.371 0 0);
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-xs: 0.75rem;
@@ -593,10 +592,6 @@
   .rounded-tr-lg {
     border-top-right-radius: var(--radius-lg);
   }
-  .rounded-b-4xl {
-    border-bottom-right-radius: var(--radius-4xl);
-    border-bottom-left-radius: var(--radius-4xl);
-  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -633,6 +628,9 @@
   }
   .bg-tertiary {
     background-color: var(--color-tertiary);
+  }
+  .bg-zinc-500 {
+    background-color: var(--color-zinc-500);
   }
   .via-none {
     --tw-gradient-via-stops: initial;
@@ -780,12 +778,6 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
-  .text-neutral-500 {
-    color: var(--color-neutral-500);
-  }
-  .text-neutral-700 {
-    color: var(--color-neutral-700);
-  }
   .text-primary {
     color: var(--color-primary);
   }
@@ -797,6 +789,9 @@
   }
   .text-secondary\! {
     color: var(--color-secondary) !important;
+  }
+  .text-tertiary {
+    color: var(--color-tertiary);
   }
   .text-white {
     color: var(--color-white);
@@ -1091,29 +1086,6 @@
       }
     }
   }
-  .hover\:border {
-    &:hover {
-      @media (hover: hover) {
-        border-style: var(--tw-border-style);
-        border-width: 1px;
-      }
-    }
-  }
-  .hover\:border-solid {
-    &:hover {
-      @media (hover: hover) {
-        --tw-border-style: solid;
-        border-style: solid;
-      }
-    }
-  }
-  .hover\:border-primary {
-    &:hover {
-      @media (hover: hover) {
-        border-color: var(--color-primary);
-      }
-    }
-  }
   .hover\:bg-primary {
     &:hover {
       @media (hover: hover) {
@@ -1139,6 +1111,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-secondary) !important;
+      }
+    }
+  }
+  .hover\:bg-zinc-500\! {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-zinc-500) !important;
       }
     }
   }
@@ -1244,7 +1223,7 @@ html, body {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0;
   }
 }
-.chat {
+.chat-wrapper {
   width: 100%;
   height: 100%;
   padding: 21px;
@@ -1261,7 +1240,7 @@ html, body {
   border: 1px solid #cccccca2;
 }
 @media (width >= 48rem) {
-  .chat {
+  .chat-wrapper {
     width: 400px;
     height: 95dvh;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.22);

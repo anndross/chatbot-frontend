@@ -14,7 +14,7 @@ export function MessageName({ variant }: MessageNameProps) {
   return (
     <span
       className={clsx({
-        "text-base text-neutral-700 mt-3 mb-2 font-medium": true,
+        "text-base text-secondary mt-3 mb-2 font-medium": true,
         "justify-self-start": variant === "bot",
         "justify-self-end": variant === "user",
       })}

@@ -45,7 +45,7 @@ export function Chat() {
 
         <Conversation />
 
-        <div className="rounded-b-4xl bg-primary w-full h-auto flex items-center justify-center">
+        <div className="w-full h-auto flex items-center justify-center">
           <Input />
         </div>
       </Wrapper>

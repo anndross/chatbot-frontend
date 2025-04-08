@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useChat } from "@/chat/context";
 import ChatSVG from "@/assets/chat.svg";
 import { useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type WindowWithChatWasOpenProps = typeof globalThis & {
   chatWasOpen?: boolean;
@@ -35,7 +36,10 @@ export function Open() {
       setChatbot((prev) => ({
         ...prev,
         visible: true,
-        messages: [...prev.messages, { type: "user", value, time: new Date() }],
+        messages: [
+          ...prev.messages,
+          { id: uuidv4(), type: "user", value, time: new Date() },
+        ],
       }));
 
       input.value = "";

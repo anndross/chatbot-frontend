@@ -4,7 +4,7 @@ import {
 } from "@/services/getRecommendedProducts";
 import { RecommendedProductsType } from "@/types/chatbot";
 import { useEffect, useState, useTransition } from "react";
-import { MessageWrapper } from "@/chat/components/conversation/message/wrapper";
+import { MessageContainer } from "@/chat/components/conversation/message/container";
 import { AddToCartAction } from "@/chat/components/conversation/message/mapped-messages/add-to-cart";
 import { formatPrice } from "@/utils/format-price";
 import { useChat } from "@/chat/context";
@@ -47,7 +47,7 @@ export function RecommendedProductsAction({
     <div className="mb-6">
       {products.map((product) => {
         return (
-          <MessageWrapper key={product.itemId} variant="bot">
+          <MessageContainer key={product.itemId} variant="bot">
             <div className="w-full h-full max-h-24 flex items-center gap-4">
               <div className="relative h-full">
                 <img
@@ -83,7 +83,7 @@ export function RecommendedProductsAction({
                 </div>
               </a>
             </div>
-          </MessageWrapper>
+          </MessageContainer>
         );
       })}
     </div>

@@ -19,7 +19,7 @@ export function Wrapper({ children }: WrapperProps) {
     "default" | ChatPositions,
     ComponentProps<"div">["className"]
   > = {
-    default: "chat",
+    default: "chat-wrapper",
     left: "open-chat-from-left",
     right: "open-chat-from-right",
     "bottom-left": "open-chat-from-bottom-left",

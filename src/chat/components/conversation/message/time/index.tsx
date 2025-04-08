@@ -13,7 +13,7 @@ export function MessageTime({ time, variant }: MessageTimeProps) {
       {time && (
         <span
           className={clsx({
-            "text-[10px] text-neutral-500 mb-2.5": true,
+            "text-[10px] text-tertiary mb-2.5": true,
             "justify-self-end": variant === "bot",
             "justify-self-start": variant === "user",
           })}

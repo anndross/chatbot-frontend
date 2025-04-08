@@ -1,7 +1,7 @@
 import { Loading } from "@/components/ui/loading";
 import clsx from "clsx";
 import { Markup } from "interweave";
-import { MessageWrapper } from "../../wrapper";
+import { MessageContainer } from "../../container";
 import { MessageTime } from "../../time";
 import { MessageName } from "../../name";
 import { MessageProps } from "../..";
@@ -33,9 +33,9 @@ export function DefaultMessage({ data, variant }: MessageProps) {
             <MessageName variant={variant} />
           )}
 
-        <MessageWrapper variant={variant}>
+        <MessageContainer variant={variant}>
           {isLoading ? <Loading /> : <Markup content={text} />}
-        </MessageWrapper>
+        </MessageContainer>
 
         {!isLoading && <MessageTime time={time} variant={variant} />}
       </div>

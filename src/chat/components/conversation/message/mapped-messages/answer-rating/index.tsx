@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { MessageWrapper } from "@/chat/components/conversation/message/wrapper";
+import { MessageContainer } from "@/chat/components/conversation/message/container";
 import clsx from "clsx";
 import { handleSendRating } from "@/services/handleSendRating";
 import { MessageName } from "@/chat/components/conversation/message/name";
@@ -9,6 +9,7 @@ import { useChat } from "@/chat/context";
 import { Message } from "@/types/chatbot";
 import { useAddAnimatedMessage } from "@/hooks/addAnimatedMessage";
 import { v4 as uuidv4 } from "uuid";
+import likeImg from "@/assets/like.png";
 
 export interface AnswerRatingProps {
   data: Message;
@@ -46,7 +47,7 @@ export function AnswerRating({ data }: AnswerRatingProps) {
         <MessageName variant="bot" />
       )}
 
-      <MessageWrapper variant="bot">
+      <MessageContainer variant="bot">
         {data.value}
 
         <div
@@ -57,23 +58,26 @@ export function AnswerRating({ data }: AnswerRatingProps) {
         >
           <Button
             disabled={like !== null}
-            className={clsx("rounded-sm border border-primary border-solid", {
-              "bg-secondary text-primary!": like === true,
-            })}
+            className={clsx(
+              "rounded-sm border hover:bg-zinc-500! border-primary border-solid",
+              {
+                "bg-zinc-500 text-primary!": like === true,
+              }
+            )}
             onClick={() => setLike(true)}
           >
-            <img src="/assets/like.png" alt="" width={20} height={20} />
+            <img src={likeImg} alt="" width={20} height={20} />
           </Button>
           <Button
             disabled={like !== null}
             className={clsx(
-              "rounded-sm hover:border hover:border-primary hover:border-solid",
-              { "bg-secondary text-primary!": like === false }
+              "rounded-sm hover:bg-zinc-500! border border-primary border-solid",
+              { "bg-zinc-500 text-primary!": like === false }
             )}
             onClick={() => setLike(false)}
           >
             <img
-              src="/assets/like.png"
+              src={likeImg}
               alt=""
               width={20}
               height={20}
@@ -81,7 +85,7 @@ export function AnswerRating({ data }: AnswerRatingProps) {
             />
           </Button>
         </div>
-      </MessageWrapper>
+      </MessageContainer>
 
       <MessageTime time={new Date()} variant="bot" />
     </div>

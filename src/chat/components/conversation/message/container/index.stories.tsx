@@ -1,13 +1,13 @@
 import { StoryObj } from "@storybook/react";
 import {
   MessageWapperProps,
-  MessageWrapper,
-} from "@/chat/components/conversation/message/wrapper";
+  MessageContainer,
+} from "@/chat/components/conversation/message/container";
 import { Loading as LoadingComponent } from "@/components/ui/loading";
 
 export default {
   title: "Chat/Components/Message/Wrapper",
-  component: MessageWrapper,
+  component: MessageContainer,
 };
 
 export const User: StoryObj<MessageWapperProps> = {
