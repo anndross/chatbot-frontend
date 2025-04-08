@@ -62,7 +62,7 @@ export function AnswerRating({ data }: AnswerRatingProps) {
             })}
             onClick={() => setLike(true)}
           >
-            Sim
+            <img src="/assets/like.png" alt="" width={20} height={20} />
           </Button>
           <Button
             disabled={like !== null}
@@ -72,7 +72,13 @@ export function AnswerRating({ data }: AnswerRatingProps) {
             )}
             onClick={() => setLike(false)}
           >
-            Não
+            <img
+              src="/assets/like.png"
+              alt=""
+              width={20}
+              height={20}
+              style={{ rotate: "180deg" }}
+            />
           </Button>
         </div>
       </MessageWrapper>
