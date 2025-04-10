@@ -7,10 +7,6 @@ export function useAddAnimatedMessage() {
   function animateMessage(data: Message, timeToTypePerLetter: number = 10) {
     const splittedMessage = data.value.match(/[^\n]|\n/g) || [];
 
-    setTimeout(() => {
-      setChatbot((prev) => ({ ...prev, loadingMessage: false }));
-    }, splittedMessage.length * timeToTypePerLetter);
-
     splittedMessage.forEach((letter, index) => {
       setTimeout(() => {
         setChatbot((prev) => {
@@ -41,7 +37,7 @@ export function useAddAnimatedMessage() {
           return {
             ...prev,
             messages: newMessages,
-            loadingMessage: true,
+            loadingMessage: index !== splittedMessage.length - 1,
           };
         });
       }, index * timeToTypePerLetter); // Adiciona um atraso crescente a cada letra

@@ -11,9 +11,10 @@ import { useAskToChat } from "@/hooks/askToChat";
 
 export function Chat() {
   const {
-    chatbot: { messages, conversationId },
+    chatbot: { messages, conversationId, loadingMessage },
   } = useChat();
 
+  console.log("loadingMessage", loadingMessage);
   const authenticate = useAuth();
   const askToChat = useAskToChat();
 

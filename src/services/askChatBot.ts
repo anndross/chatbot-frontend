@@ -8,7 +8,6 @@ export type AskChatbotResponseHandler = (
 
 export async function askChatbot(
   question: string,
-  conversationId: string,
   responseHandler?: AskChatbotResponseHandler
 ): Promise<void | null> {
   if (!question) return null;
@@ -17,6 +16,8 @@ export async function askChatbot(
 
   try {
     const authToken = Cookies.get("access_token");
+
+    const threadIdFromCache = window.localStorage.getItem("chatbot-threadid");
 
     const res = await fetch(`${API_BASE_URL}/chat`, {
       method: "POST",
@@ -27,7 +28,7 @@ export async function askChatbot(
       },
       body: JSON.stringify({
         question,
-        conversationId,
+        conversationId: threadIdFromCache,
         slug: window.location.pathname.match(/\/([^\/]+)\/p/)?.[1] || "",
       }),
     });
@@ -37,6 +38,14 @@ export async function askChatbot(
         responseHandler("Erro ao se conectar com o chat.");
 
       return;
+    }
+
+    const threadId = res.headers.get("x-thread-id");
+
+    console.log("threadId", threadId);
+
+    if (threadId) {
+      window.localStorage.setItem("chatbot-threadid", threadId);
     }
 
     const reader = res?.body?.getReader();

@@ -59,7 +59,7 @@ export function useAskToChat() {
       }
 
       startTransition(async () => {
-        await askChatbot(question, conversationId, responseHandler);
+        await askChatbot(question, responseHandler);
       });
     },
     [conversationId, setChatbot]
