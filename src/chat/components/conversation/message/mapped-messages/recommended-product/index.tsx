@@ -1,51 +1,26 @@
-import {
-  getRecommendedProducts,
-  RecommendedProductsResponse,
-} from "@/services/getRecommendedProducts";
-import { RecommendedProductsType } from "@/types/chatbot";
-import { useEffect, useState, useTransition } from "react";
+import { RecommendedProductsResponse } from "@/services/getRecommendedProducts";
+import { Message } from "@/types/chatbot";
+import { useEffect, useState } from "react";
 import { MessageContainer } from "@/chat/components/conversation/message/container";
 import { AddToCartAction } from "@/chat/components/conversation/message/mapped-messages/add-to-cart";
 import { formatPrice } from "@/utils/format-price";
-import { useChat } from "@/chat/context";
 
-export interface RecommendedProductsActionProps {
-  data: RecommendedProductsType;
+export interface RecommendedProductsProps {
+  data: Message;
 }
 
-export function RecommendedProductsAction({
-  data: recommendedProducts,
-}: RecommendedProductsActionProps) {
-  const { updateChat } = useChat();
-  const [isPending, startTransition] = useTransition();
-
+export function RecommendedProducts({ data }: RecommendedProductsProps) {
   const [products, setProducts] = useState<
     RecommendedProductsResponse["recommendedProductsData"]
-  >([]);
+  >(data.action?.data || []);
 
   useEffect(() => {
-    updateChat({ loadingMessage: isPending });
-  }, [isPending]);
-
-  useEffect(() => {
-    async function getProducts() {
-      startTransition(async () => {
-        const productsResponse = await getRecommendedProducts(
-          recommendedProducts
-        );
-
-        if (!productsResponse) return;
-
-        setProducts(productsResponse.recommendedProductsData);
-      });
-    }
-
-    getProducts();
-  }, [recommendedProducts]);
+    if (data.action?.data) setProducts(data.action?.data);
+  }, [data.action?.data]);
 
   return (
     <div className="mb-6">
-      {products.map((product) => {
+      {products?.map((product) => {
         return (
           <MessageContainer key={product.itemId} variant="bot">
             <div className="w-full h-full max-h-24 flex items-center gap-4">

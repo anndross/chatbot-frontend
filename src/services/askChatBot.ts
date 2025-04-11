@@ -59,9 +59,20 @@ export async function askChatbot(
 
       const decoded = decoder.decode(value, { stream: true });
 
-      if (decoded.match(/"actions":/)) {
+      console.log("decoded", decoded);
+
+      if (/{"ui_action":/.test(decoded)) {
+        const splitIndex = decoded.indexOf('{"ui_action":');
+        const textPart = decoded.slice(0, splitIndex).trim();
+        const jsonPart = decoded.slice(splitIndex);
+
+        console.log(textPart);
+        if (typeof responseHandler === "function") responseHandler(textPart);
+
         try {
-          const decodedAsJSON: ChatbotResponse = JSON.parse(decoded);
+          const decodedAsJSON: ChatbotResponse = JSON.parse(jsonPart);
+
+          console.log("decodedAsJSON", decodedAsJSON);
 
           if (typeof responseHandler === "function")
             responseHandler(decodedAsJSON);

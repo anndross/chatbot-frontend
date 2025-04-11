@@ -43,15 +43,26 @@ export function useAskToChat() {
             return { ...prev };
           });
         } else {
+          setChatbot((prev) => ({
+            ...prev,
+            messages: [
+              ...prev.messages,
+              {
+                type: "bot",
+                value: "",
+                id: uuidv4(),
+                time: new Date(),
+                actions: [],
+              },
+            ],
+          }));
+
           setChatbot((prev) => {
             const lastMessage = prev.messages[prev.messages?.length - 1];
 
             if (lastMessage.type === "user") return prev;
 
-            lastMessage.action = {
-              type: "recommend_product",
-              data: data.recommended_products,
-            };
+            lastMessage.action = data.ui_action;
 
             return { ...prev };
           });

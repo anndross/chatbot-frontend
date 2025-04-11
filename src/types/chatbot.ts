@@ -18,7 +18,7 @@ export type Message = {
 
 export type Actions =
   | {
-      type: "recommend_product";
+      type: "recommended_products";
       data: RecommendedProductsType;
     }
   | {
@@ -37,13 +37,21 @@ export type Actions =
 export type ActionsType =
   | "add_to_cart"
   | "see_more"
-  | "recommend_product"
+  | "recommended_products"
   | "rating";
 
-export type RecommendedProductsType = string[];
+export type RecommendedProductsType = {
+  name: string;
+  imageUrl: string;
+  price: number;
+  listPrice: number;
+  itemId: string;
+  link: string;
+  sellerId: string;
+}[];
 
-export interface ChatbotResponse {
-  final_response: string;
-  actions: ActionsType[] | [];
-  recommended_products: RecommendedProductsType | [];
-}
+export type ChatbotResponse =
+  | string
+  | {
+      ui_action: Actions;
+    };
